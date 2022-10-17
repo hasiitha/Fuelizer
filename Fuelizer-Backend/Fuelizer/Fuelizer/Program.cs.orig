@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 using Fuelizer.Models.FuelTypes;
-using Fuelizer.Models.Customer;
 using Fuelizer.Models.Suppliers;
 using Fuelizer.Services.FuelTypes;
+=======
+using Fuelizer.Models.Customer;
+using Fuelizer.Models.Suppliers;
 using Fuelizer.Services.Customers;
+>>>>>>> origin/dev
 using Fuelizer.Services.Suppliers;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -13,10 +17,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<SupplierDBSettings>(
     builder.Configuration.GetSection(nameof(SupplierDBSettings)));
 
+<<<<<<< HEAD
 builder.Services.Configure<FuelTypesDBSettings>(
     builder.Configuration.GetSection(nameof(FuelTypesDBSettings)));
-builder.Services.Configure<CustomerDBSettings>(
-    builder.Configuration.GetSection(nameof(CustomerDBSettings)));
 
 
 
@@ -24,9 +27,17 @@ builder.Services.Configure<CustomerDBSettings>(
 builder.Services.AddSingleton<ISupplierDBSettings>(sp => sp.GetRequiredService<IOptions<SupplierDBSettings>>().Value);
 
 builder.Services.AddSingleton<IFuelTypesDBSettings>(sp => sp.GetRequiredService<IOptions<FuelTypesDBSettings>>().Value);
-builder.Services.AddSingleton<ICustomerDBSettings>(cp => cp.GetRequiredService<IOptions<CustomerDBSettings>>().Value);
 
 //same connection string for all
+=======
+builder.Services.Configure<CustomerDBSettings>(
+    builder.Configuration.GetSection(nameof(CustomerDBSettings)));
+
+builder.Services.AddSingleton<ISupplierDBSettings>(sp => sp.GetRequiredService<IOptions<SupplierDBSettings>>().Value);
+
+builder.Services.AddSingleton<ICustomerDBSettings>(cp => cp.GetRequiredService<IOptions<CustomerDBSettings>>().Value);
+
+>>>>>>> origin/dev
 builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("Connection:ConnectionString")));
 
 

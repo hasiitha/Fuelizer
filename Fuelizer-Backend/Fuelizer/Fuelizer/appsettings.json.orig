@@ -1,0 +1,48 @@
+{
+<<<<<<< HEAD
+  "SupplierDBSettings": {
+    "SupplierCollectionName": "Suppliers",
+    "DatabaseName": "Fuelizer"
+  },
+  "FuelTypesDBSettings": {
+    "FuelTypesCollectionName": "FuelType",
+    "DatabaseName": "Fuelizer"
+  },
+
+    "Connection": {
+      "ConnectionString": "mongodb+srv://hasiitha:ead123@cluster0.9upng27.mongodb.net/?retryWrites=true&w=majority"
+    },
+    "Logging": {
+      "LogLevel": {
+        "Default": "Information",
+        "Microsoft.AspNetCore": "Warning"
+      }
+
+    },
+    "AllowedHosts": "*"
+  }
+=======
+    "SupplierDBSettings": {
+        "SupplierCollectionName": "Suppliers",
+        "DatabaseName": "Fuelizer"
+    },
+
+    "CustomerDBSettings": {
+        "CustomerCollectionName": "Customers",
+        "DatabaseName": "Fuelizer"
+    },
+
+    "Connection": {
+        "ConnectionString": "mongodb+srv://hasiitha:ead123@cluster0.9upng27.mongodb.net/?retryWrites=true&w=majority"
+    },
+
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+
+    },
+    "AllowedHosts": "*"
+}
+>>>>>>> origin/dev
