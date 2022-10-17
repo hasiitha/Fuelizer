@@ -1,4 +1,6 @@
+using Fuelizer.Models.Customer;
 using Fuelizer.Models.Suppliers;
+using Fuelizer.Services.Customers;
 using Fuelizer.Services.Suppliers;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -9,12 +11,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<SupplierDBSettings>(
     builder.Configuration.GetSection(nameof(SupplierDBSettings)));
 
+builder.Services.Configure<CustomerDBSettings>(
+    builder.Configuration.GetSection(nameof(CustomerDBSettings)));
+
 builder.Services.AddSingleton<ISupplierDBSettings>(sp => sp.GetRequiredService<IOptions<SupplierDBSettings>>().Value);
+
+builder.Services.AddSingleton<ICustomerDBSettings>(cp => cp.GetRequiredService<IOptions<CustomerDBSettings>>().Value);
 
 builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("Connection:ConnectionString")));
 
 
 builder.Services.AddScoped<ISupplierService, SupplierService>();
+
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 
 builder.Services.AddControllers();
