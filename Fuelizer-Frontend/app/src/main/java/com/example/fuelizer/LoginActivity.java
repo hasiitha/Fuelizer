@@ -48,20 +48,6 @@ public class LoginActivity extends AppCompatActivity {
                         break;
                 }
 
-//                if(userType == "vehicleOwner"){
-//                    Intent intent = new Intent(LoginActivity.this, VehicalOwnerRegisterActivity.class);
-//                    startActivity(intent);
-//                }else if(userType == "stationOwner"){
-//                    Intent intent = new Intent(LoginActivity.this, StationOwnerRegisterActivity.class);
-//                    startActivity(intent);
-//                } else{
-////                    Intent intent = new Intent(LoginActivity.this, StationOwnerRegisterActivity.class);
-////                    startActivity(intent);
-//                    Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-//                }
-
-
-
             }
         });
 
