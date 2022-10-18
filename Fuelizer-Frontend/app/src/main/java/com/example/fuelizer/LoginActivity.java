@@ -12,7 +12,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView txtView_RegisterHere;
     private String userType;
-    private final String name = "thimal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +23,6 @@ public class LoginActivity extends AppCompatActivity {
 
         txtView_RegisterHere = findViewById(R.id.txtView_RegisterHere);
 
-        if(userType == "vehicleOwner"){
-            System.out.println(userType);
-        }
 
         txtView_RegisterHere.setOnClickListener(new View.OnClickListener() {
             @Override
