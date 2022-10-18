@@ -2,12 +2,17 @@ package com.example.fuelizer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.example.fuelizer.databinding.ActivityCustomerListViewBinding;
 import com.example.fuelizer.databinding.ActivityMainBinding;
 
 import org.json.JSONArray;
@@ -25,26 +30,32 @@ import java.util.ArrayList;
 
 public class CustomerListView extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+//    ActivityMainBinding binding;
+    ActivityCustomerListViewBinding binding;
     ArrayList<String> stationList;
     ArrayAdapter<String> stationAdaptor;
     Handler handler = new Handler();
     ProgressBar progressBar;
+    ProgressDialog progressDialog;
+//    ListView stationListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityCustomerListViewBinding.inflate(getLayoutInflater());
 //        setContentView(R.layout.activity_customer_list_view);
+//        stationListView = findViewById(R.id.stationListView);
         setContentView(binding.getRoot());
         
         initializeStationList();
+        new fetchStations().start();
     }
 
     private void initializeStationList() {
         stationList = new ArrayList<>();
-        stationAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1,stationList);
-//        binding.station
+        String Requests[] = {"Paint Job","House Paint","Door Color"};
+        stationAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,stationList);
+        binding.stationListView.setAdapter(stationAdaptor);
     }
 
     class fetchStations extends Thread{
@@ -56,28 +67,33 @@ public class CustomerListView extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar = new ProgressBar(CustomerListView.this);
-                    progressBar.setVisibility(View.VISIBLE);
+//                    progressBar = new ProgressBar(CustomerListView.this);
+//                    progressBar.setVisibility(View.VISIBLE);
+                    progressDialog = new ProgressDialog(CustomerListView.this);
+                    progressDialog.setMessage("Loading Data");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
                 }
             });
             try {
-                URL url = new URL("http://localhost:8080/api/Stations");
+                URL url = new URL("https://dummyjson.com/users");
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
 
-                while((line= bufferedReader.readLine()) != null){
-                    data = data+line;
+                while((line = bufferedReader.readLine()) != null){
+                    data = data + line;
+//                    System.out.println("DATA SET"+data);
                 }
 
                 if(!data.isEmpty()){
                     JSONObject jsonObject = new JSONObject(data);
-                    JSONArray stations = jsonObject.getJSONArray("name");
-
+                    JSONArray stations = jsonObject.getJSONArray("users");
+                    stationList.clear();
                     for (int i = 0; i < stations.length(); i++) {
                         JSONObject names = stations.getJSONObject(i);
-                        String name = names.getString("name");
+                        String name = names.getString("firstName");
                         stationList.add(name);
                     }
                 }
@@ -92,8 +108,13 @@ public class CustomerListView extends AppCompatActivity {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    progressBar = new ProgressBar(CustomerListView.this);
-                    progressBar.setVisibility(View.GONE);
+//                    progressBar = new ProgressBar(CustomerListView.this);
+//                    progressBar.setVisibility(View.GONE);
+//                    stationAdaptor.notifyDataSetChanged();
+                    if(progressDialog.isShowing()){
+                        progressDialog.dismiss();
+                        stationAdaptor.notifyDataSetChanged();
+                    }
                 }
             });
         }
