@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Fuelizer</string>
+    <string name="vehical_owner">Vehical Owner</string>
+    <string name="station_owner">Station Owner</string>
+    <string name="signin">Sign In</string>
 </resources>
