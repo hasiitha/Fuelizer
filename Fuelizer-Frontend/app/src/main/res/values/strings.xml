@@ -3,4 +3,5 @@
     <string name="vehical_owner">Vehical Owner</string>
     <string name="station_owner">Station Owner</string>
     <string name="signin">Sign In</string>
+    <string name="register">Register</string>
 </resources>
