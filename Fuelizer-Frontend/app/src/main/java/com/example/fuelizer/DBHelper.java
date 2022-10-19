@@ -10,16 +10,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper {
 
     // initializing the DB name is SQLite
-    public static final String DBNAME = "Login.db";
+    public static final String DBNAME = "UserLogin.db";
 
     // constructor
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 1);
+        super(context, "UserLogin.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create Table users(username TEXT primary key, password TEXT)"); // creating the users table
+        db.execSQL("create Table users(username TEXT primary key, password TEXT, userType TEXT)"); // creating the users table
     }
 
     @Override
@@ -28,11 +28,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // inserting username and password to the sqlite DB
-    public Boolean insertData(String username, String password){
+    public Boolean insertData(String username, String password, String userType){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
         contentValues.put("username", username);
         contentValues.put("password", password);
+        contentValues.put("userType", userType);
         long result = MyDB.insert("users", null, contentValues);
         if(result==-1) return false;
         else
@@ -58,6 +59,8 @@ public class DBHelper extends SQLiteOpenHelper {
         else
             return false;
     }
+
+
 
 
 }

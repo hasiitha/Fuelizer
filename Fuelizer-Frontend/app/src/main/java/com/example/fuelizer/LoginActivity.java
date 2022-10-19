@@ -47,10 +47,14 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(uname.equals("") || pw.equals("")){
                     Toast.makeText(LoginActivity.this, "Enter username and password", Toast.LENGTH_SHORT).show();
+
                 } else {
+
+//                    Toast.makeText(LoginActivity.this, "data", Toast.LENGTH_SHORT).show();
                     Boolean validStatus = DB.checkusernamepassword(uname, pw);
                     if(validStatus == true){
                         // API call for user login  (check usertype before call)
+
                         Toast.makeText(LoginActivity.this, "Valid user !", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(LoginActivity.this, "Invalid user !", Toast.LENGTH_SHORT).show();
@@ -71,11 +75,13 @@ public class LoginActivity extends AppCompatActivity {
                     case "vehicleOwner":
 //                        Toast.makeText(LoginActivity.this, "vehicle", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, VehicalOwnerRegisterActivity.class);
+                        intent.putExtra("userType", "vehicleOwner");
                         startActivity(intent);
                         break;
                     case "stationOwner":
 //                        Toast.makeText(LoginActivity.this, "station", Toast.LENGTH_SHORT).show();
                         Intent intent1 = new Intent(LoginActivity.this, StationOwnerRegisterActivity.class);
+                        intent1.putExtra("userType", "stationOwner");
                         startActivity(intent1);
                         break;
                     default:

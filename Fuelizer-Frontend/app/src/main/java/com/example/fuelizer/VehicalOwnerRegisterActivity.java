@@ -15,6 +15,7 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
     private TextView txtView_login_registeredUser;
     private EditText editTxt_username, editTxt_password, editTxt_nic, editTxt_mobile, editTxt_vehicleType, editTxt_fuelType, editTxt_vehicleNumber;
     private Button btn_register;
+    private String userType;
     private DBHelper DB;
 
 
@@ -24,6 +25,8 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vehical_owner_register);
 
         txtView_login_registeredUser = findViewById(R.id.txtView_RegisteredUser_signIn);
+
+        userType = getIntent().getStringExtra("userType");
 
         DB = new DBHelper(this);
 
@@ -54,7 +57,7 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
                 }else {
                     Boolean checkUser = DB.checkusername(uname);
                     if(checkUser == false){
-                        Boolean insertSuccess = DB.insertData(uname, pw);
+                        Boolean insertSuccess = DB.insertData(uname, pw, userType);
                         if(insertSuccess == true){
                             Toast.makeText(VehicalOwnerRegisterActivity.this, "User Register Successfully !", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(VehicalOwnerRegisterActivity.this, LoginActivity.class);
