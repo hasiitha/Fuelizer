@@ -1,16 +1,21 @@
 package com.example.fuelizer;
 
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 public class DBHelper extends SQLiteOpenHelper {
 
+    public String USERTYPE;
+
     // initializing the DB name is SQLite
     public static final String DBNAME = "UserLogin.db";
+    private static final String TAG = "tag";
 
     // constructor
     public DBHelper(Context context) {
@@ -58,6 +63,22 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         else
             return false;
+    }
+
+    public void checkUserType(String uname){
+        SQLiteDatabase MyDB = this.getReadableDatabase();
+
+        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{uname});
+
+
+        while(cursor.moveToNext()){
+
+            Log.e(TAG,"userType - "+cursor.getString(2));
+            USERTYPE = cursor.getString(2);
+        }
+
+        cursor.close();
+
     }
 
 

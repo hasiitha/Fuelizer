@@ -13,11 +13,13 @@ import android.widget.Toast;
 public class LoginActivity extends AppCompatActivity {
 
     // initializing elements
+
     private TextView txtView_RegisterHere;
     private String userType;
     private Button btn_signIn;
     private EditText editTxt_username, editTxt_password;
     private DBHelper DB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +52,21 @@ public class LoginActivity extends AppCompatActivity {
 
                 } else {
 
-//                    Toast.makeText(LoginActivity.this, "data", Toast.LENGTH_SHORT).show();
                     Boolean validStatus = DB.checkusernamepassword(uname, pw);
                     if(validStatus == true){
-                        // API call for user login  (check usertype before call)
 
-                        Toast.makeText(LoginActivity.this, "Valid user !", Toast.LENGTH_SHORT).show();
+                        DB.checkUserType(uname);
+
+                        if(userType.equals(DB.USERTYPE)){
+                            // API call for user login  (check usertype before call)
+                            Toast.makeText(LoginActivity.this, "Valid user !", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Incorrect user type !", Toast.LENGTH_SHORT).show();
+                        }
+
                     }else {
                         Toast.makeText(LoginActivity.this, "Invalid user !", Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
             }
         });
@@ -70,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // navigating to vehicle and station owner registrations
+                // navigating to vehicle or station owner registrations
                 switch (userType){
                     case "vehicleOwner":
 //                        Toast.makeText(LoginActivity.this, "vehicle", Toast.LENGTH_SHORT).show();
