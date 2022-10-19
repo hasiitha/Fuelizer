@@ -15,12 +15,15 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
     private TextView txtView_login_registeredUser_SO;
     private EditText editTxt_username, editTxt_password, editTxt_nic, editTxt_mobile, editTxt_email;
     private Button btn_register;
+    private String userType;
     private DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_station_owner_register);
+
+        userType = getIntent().getStringExtra("userType");
 
         DB = new DBHelper(this);
 
@@ -50,7 +53,7 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
                     Boolean checkUser = DB.checkusername(uname);
 
                     if(checkUser == false){
-                        Boolean insertSuccess = DB.insertData(uname, pw);
+                        Boolean insertSuccess = DB.insertData(uname, pw, userType);
                         if(insertSuccess == true){
                             Toast.makeText(StationOwnerRegisterActivity.this, "User Register Successfully !", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(StationOwnerRegisterActivity.this, PetrolStationRegistration.class);
