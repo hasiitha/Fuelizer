@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_v_owner, btn_s_owner;
+    private Button btn_v_owner, btn_s_owner, haitha_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +18,13 @@ public class MainActivity extends AppCompatActivity {
 
         btn_v_owner=findViewById(R.id.btn_vehical_owner);
         btn_s_owner = findViewById(R.id.btn_station_owner);
+        haitha_btn = findViewById(R.id.haitha_btn);
 
         btn_v_owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, CustomerListView.class);
                 intent.putExtra("userType", "vehicleOwner");
                 startActivity(intent);
             }
@@ -33,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 intent.putExtra("userType", "stationOwner");
+                startActivity(intent);
+            }
+        });
+
+        haitha_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PetrolStationRegistration.class);
+
                 startActivity(intent);
             }
         });
