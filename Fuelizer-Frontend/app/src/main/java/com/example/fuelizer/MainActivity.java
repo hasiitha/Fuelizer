@@ -23,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
         btn_v_owner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this, CustomerListView.class);
                 intent.putExtra("userType", "vehicleOwner");
                 startActivity(intent);
             }

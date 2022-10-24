@@ -9,9 +9,18 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.fuelizer.databinding.ActivityCustomerListViewBinding;
 import com.example.fuelizer.databinding.ActivityMainBinding;
 
@@ -29,94 +38,51 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class CustomerListView extends AppCompatActivity {
-
-//    ActivityMainBinding binding;
-    ActivityCustomerListViewBinding binding;
-    ArrayList<String> stationList;
-    ArrayAdapter<String> stationAdaptor;
-    Handler handler = new Handler();
-    ProgressBar progressBar;
-    ProgressDialog progressDialog;
-//    ListView stationListView;
+    
+    Button showListBtn;
+    ListView stationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCustomerListViewBinding.inflate(getLayoutInflater());
-//        setContentView(R.layout.activity_customer_list_view);
-//        stationListView = findViewById(R.id.stationListView);
-        setContentView(binding.getRoot());
-        
-        initializeStationList();
-        new fetchStations().start();
-    }
+        setContentView(R.layout.activity_customer_list_view);
 
-    private void initializeStationList() {
-        stationList = new ArrayList<>();
-        String Requests[] = {"Paint Job","House Paint","Door Color"};
-        stationAdaptor = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,stationList);
-        binding.stationListView.setAdapter(stationAdaptor);
-    }
+        showListBtn = findViewById(R.id.fetchStationBtn);
+        stationList = findViewById(R.id.stationListView);
 
-    class fetchStations extends Thread{
-        String data = "";
+        showListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RequestQueue queue = Volley.newRequestQueue(CustomerListView.this);
+                String url = "http://192.168.1.5:8080/api/FuelStation";
 
-
-        @Override
-        public void run() {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-//                    progressBar = new ProgressBar(CustomerListView.this);
-//                    progressBar.setVisibility(View.VISIBLE);
-                    progressDialog = new ProgressDialog(CustomerListView.this);
-                    progressDialog.setMessage("Loading Data");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-                }
-            });
-            try {
-                URL url = new URL("https://dummyjson.com/users");
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                InputStream inputStream = httpURLConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String line;
-
-                while((line = bufferedReader.readLine()) != null){
-                    data = data + line;
-//                    System.out.println("DATA SET"+data);
-                }
-
-                if(!data.isEmpty()){
-                    JSONObject jsonObject = new JSONObject(data);
-                    JSONArray stations = jsonObject.getJSONArray("users");
-                    stationList.clear();
-                    for (int i = 0; i < stations.length(); i++) {
-                        JSONObject names = stations.getJSONObject(i);
-                        String name = names.getString("firstName");
-                        stationList.add(name);
+// Request a array response from the provided URL.
+                JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        String stationName = "";
+                        try {
+                            JSONObject stationInfo = response.getJSONObject(0);
+                            stationName = stationInfo.getString("stationName");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(CustomerListView.this,stationName , Toast.LENGTH_SHORT).show();
                     }
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                }, new Response.ErrorListener(){
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(CustomerListView.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+// Add the request to the RequestQueue.
+                queue.add(request);
             }
 
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-//                    progressBar = new ProgressBar(CustomerListView.this);
-//                    progressBar.setVisibility(View.GONE);
-//                    stationAdaptor.notifyDataSetChanged();
-                    if(progressDialog.isShowing()){
-                        progressDialog.dismiss();
-                        stationAdaptor.notifyDataSetChanged();
-                    }
-                }
-            });
-        }
+        });
     }
+
+//
 }
