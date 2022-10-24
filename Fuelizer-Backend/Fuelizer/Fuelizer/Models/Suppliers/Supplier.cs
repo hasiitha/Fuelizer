@@ -14,7 +14,14 @@ namespace Fuelizer.Models.Suppliers
         [BsonElement("username")]
         public string UserName { set; get; } = String.Empty;
 
+        [BsonElement("nic")]
+        public string Nic { set; get; } = String.Empty;
 
+        [BsonElement("mobileNumber")]
+        public string MobileNumber { set; get; } = String.Empty;
+
+        [BsonElement("email")]
+        public string Email { set; get; } = String.Empty;
 
     }
 }
