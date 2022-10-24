@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fuelizer">
         <activity
+            android:name=".ViewMyPetrolStation"
+            android:exported="false" />
+        <activity
+            android:name=".MyPetrolStationList"
+            android:exported="false" />
+        <activity
             android:name=".StationDetailsActivity"
             android:exported="false" />
         <activity
