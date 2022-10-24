@@ -4,4 +4,6 @@
     <string name="station_owner">Station Owner</string>
     <string name="signin">Sign In</string>
     <string name="register">Register</string>
+    <string name="AddStation">addStation</string>
+    <string name="Add">Add</string>
 </resources>
