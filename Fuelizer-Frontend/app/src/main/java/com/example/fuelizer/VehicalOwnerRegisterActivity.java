@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
     private TextView txtView_login_registeredUser;
-    private EditText editTxt_username, editTxt_password, editTxt_nic, editTxt_mobile, editTxt_vehicleType, editTxt_fuelType, editTxt_vehicleNumber;
+    private EditText editTxt_username, editTxt_password, editTxt_nic, editTxt_mobile, editTxt_vehicleType, editTxt_fuelType, editTxt_vehicleNumber, editText_chasisNumber;
     private Button btn_register;
     private String userType;
     private DBHelper DB;
@@ -37,13 +37,14 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
         editTxt_vehicleType = findViewById(R.id.editTxt_Regis_vehicleType);
         editTxt_fuelType = findViewById(R.id.editTxt_Regis_fuelType);
         editTxt_vehicleNumber = findViewById(R.id.editTxt_Regis_vehicleNumber);
+        editText_chasisNumber = findViewById(R.id.editTxt_Regis_chasisNumber);
 
         btn_register = findViewById(R.id.btn_vehicleOwner_register);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uname, pw, nic, mobile, vType, fType, vNumber;
+                String uname, pw, nic, mobile, vType, fType, vNumber, chasisNumber;
                 uname = editTxt_username.getText().toString();
                 pw = editTxt_password.getText().toString();
                 nic = editTxt_nic.getText().toString();
@@ -51,8 +52,9 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
                 vType = editTxt_vehicleType.getText().toString();
                 fType = editTxt_fuelType.getText().toString();
                 vNumber = editTxt_vehicleNumber.getText().toString();
+                chasisNumber = editText_chasisNumber.getText().toString();
 
-                if(uname.equals("") || pw.equals("") || nic.equals("") || mobile.equals("") || vType.equals("") || fType.equals("") || vNumber.equals("")){
+                if(uname.equals("") || pw.equals("") || nic.equals("") || mobile.equals("") || vType.equals("") || fType.equals("") || vNumber.equals("") || chasisNumber.equals("")){
                     Toast.makeText(VehicalOwnerRegisterActivity.this, "Enter all the fields !", Toast.LENGTH_SHORT).show();
                 }else {
                     Boolean checkUser = DB.checkusername(uname);
@@ -74,6 +76,7 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
             }
         });
 
+        // redirecting to login page
         txtView_login_registeredUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
