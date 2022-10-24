@@ -81,6 +81,7 @@
             android:id="@+id/btn_vehicleOwner_register"
             android:layout_width="146dp"
             android:layout_height="50dp"
+            android:layout_marginTop="16dp"
             android:background="#003049"
             android:text="@string/register"
             android:textColor="@color/white"
@@ -89,10 +90,10 @@
             app:cornerRadius="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.513"
+            app:layout_constraintHorizontal_bias="0.475"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTxt_Regis_vehicleNumber"
-            app:layout_constraintVertical_bias="0.469" />
+            app:layout_constraintVertical_bias="0.461" />
 
         <EditText
             android:id="@+id/editTxt_Regis_vehicleNumber"
