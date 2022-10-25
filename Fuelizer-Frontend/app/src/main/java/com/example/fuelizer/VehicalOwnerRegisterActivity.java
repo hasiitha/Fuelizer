@@ -27,12 +27,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+//    this class is to register a vehicle owner to the system
+
 public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
     private TextView txtView_login_registeredUser;
     private EditText editTxt_username, editTxt_password, editTxt_nic, editTxt_mobile, editTxt_vehicleType, editTxt_fuelType, editTxt_vehicleNumber, editText_chasisNumber;
     private Button btn_register;
-//    private ProgressBar vehicleOwnerPB;
     private String userType;
     private DBHelper DB;
     private RequestQueue requestQueue;
@@ -57,10 +58,10 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
         editTxt_fuelType = findViewById(R.id.editTxt_Regis_fuelType);
         editTxt_vehicleNumber = findViewById(R.id.editTxt_Regis_vehicleNumber);
         editText_chasisNumber = findViewById(R.id.editTxt_Regis_chasisNumber);
-//        vehicleOwnerPB = findViewById(R.id.vehicle_owner_PB);
 
         btn_register = findViewById(R.id.btn_vehicleOwner_register);
 
+        // implementation for button to register the user
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,9 +81,10 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
                 }else {
                     Boolean checkUser = DB.checkusername(uname);
                     if(checkUser == false){
-                        Boolean insertSuccess = DB.insertData(uname, pw, userType);
                         postDataToDB(uname,nic,mobile,vType,fType,vNumber,chasisNumber);
-                        if(insertSuccess == true){Toast.makeText(VehicalOwnerRegisterActivity.this, "User Register Successfully !", Toast.LENGTH_SHORT).show();
+
+                        Boolean insertSuccess = DB.insertData(uname, pw, userType);
+
                             Intent intent = new Intent(VehicalOwnerRegisterActivity.this, LoginActivity.class);
                             intent.putExtra("userType", "vehicleOwner");
                             startActivity(intent);
@@ -98,7 +100,7 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
             }
         });
 
-        // redirecting to login page
+        // implementation to redirecting to login page
         txtView_login_registeredUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,40 +114,46 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
     }
 
+    // implementation to post the vehicle owner data to DB
     private void postDataToDB(String name, String nic, String mobile, String vType, String fType, String vNumber, String chasisNumber ){
-        // url to post the user data
-        String url = "http://192.168.1.11:8081/api/Customer";
-//        vehicleOwnerPB.setVisibility(View.VISIBLE);
 
-        HashMap<String, String> params = new HashMap<String, String>();
+        try {
+            // url to post the user data
+            String url = "http://192.168.1.11:8081/api/Customer";
 
-        params.put("userName", name);
-        params.put("nic", nic);
-        params.put("mobileNumber", mobile);
-        params.put("vehicleType", vType);
-        params.put("fuelType", fType);
-        params.put("vehicleNumber", vNumber);
-        params.put("chasisNumber", chasisNumber);
+            HashMap<String, String> params = new HashMap<String, String>();
 
-        JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            VolleyLog.v("Response:%n %s", response.toString(4));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            params.put("userName", name);
+            params.put("nic", nic);
+            params.put("mobileNumber", mobile);
+            params.put("vehicleType", vType);
+            params.put("fuelType", fType);
+            params.put("vehicleNumber", vNumber);
+            params.put("chasisNumber", chasisNumber);
+
+            JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                VolleyLog.v("Response:%n %s", response.toString(4));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
-            }
-        });
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                }
+            });
 
-        requestQueue = Volley.newRequestQueue(VehicalOwnerRegisterActivity.this);
-        requestQueue.add(req);
+            requestQueue = Volley.newRequestQueue(VehicalOwnerRegisterActivity.this);
+            requestQueue.add(req);
+
+        }catch (Exception e){
+
+        }
 
     }
 

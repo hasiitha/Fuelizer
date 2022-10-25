@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+// this class has implemented all the functions to the local sqlite database
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -32,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("drop TABLE if exists users");
     }
 
-    // inserting username and password to the sqlite DB
+    // inserting username, password and user type to the local sqlite DB
     public Boolean insertData(String username, String password, String userType){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
@@ -65,14 +66,13 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
+    //checking the registered user's type
     public void checkUserType(String uname){
         SQLiteDatabase MyDB = this.getReadableDatabase();
 
         Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[]{uname});
 
-
         while(cursor.moveToNext()){
-
             Log.e(TAG,"userType - "+cursor.getString(2));
             USERTYPE = cursor.getString(2);
         }
