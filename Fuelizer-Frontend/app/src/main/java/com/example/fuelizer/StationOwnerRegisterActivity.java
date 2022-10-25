@@ -22,6 +22,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+// this class is to register a station owner to the system
+
 public class StationOwnerRegisterActivity extends AppCompatActivity {
 
     private TextView txtView_login_registeredUser_SO;
@@ -62,7 +64,7 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
                 if(uname.equals("") || pw.equals("") || nic.equals("") || mobile.equals("") || email.equals("")){ //checking for empty fields
                     Toast.makeText(StationOwnerRegisterActivity.this, "Fill all the fields !", Toast.LENGTH_SHORT).show();
                 } else {
-//                    Toast.makeText(StationOwnerRegisterActivity.this, "Good", Toast.LENGTH_SHORT).show();
+
                     Boolean checkUser = DB.checkusername(uname);
 
                     if(checkUser == false){
@@ -97,13 +99,12 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
 
     }
 
+    // implementation to post the station owner data to DB
     private void postDataToDB(String name, String nic, String mobile, String email ){
 
         try {
-
             // url to post the user data
             String url = "http://192.168.1.11:8081/api/Supplier";
-
 
             HashMap<String, String> params = new HashMap<String, String>();
 
@@ -111,7 +112,6 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
             params.put("nic", nic);
             params.put("mobileNumber", mobile);
             params.put("email", email);
-
 
             JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params),
                     new Response.Listener<JSONObject>() {
@@ -137,9 +137,6 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
 
         }
 
-
-
     }
-
 
 }
