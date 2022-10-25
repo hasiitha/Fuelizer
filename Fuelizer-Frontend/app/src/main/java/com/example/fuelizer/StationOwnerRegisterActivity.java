@@ -66,8 +66,10 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
                     Boolean checkUser = DB.checkusername(uname);
 
                     if(checkUser == false){
-                        Boolean insertSuccess = DB.insertData(uname, pw, userType);
                         postDataToDB(uname, nic, mobile, email);
+
+                        Boolean insertSuccess = DB.insertData(uname, pw, userType);
+
                         if(insertSuccess == true){
                             Toast.makeText(StationOwnerRegisterActivity.this, "User Register Successfully !", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(StationOwnerRegisterActivity.this, PetrolStationRegistration.class);
@@ -96,37 +98,46 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
     }
 
     private void postDataToDB(String name, String nic, String mobile, String email ){
-        // url to post the user data
-        String url = "http://192.168.1.11:8081/api/Supplier";
-//        vehicleOwnerPB.setVisibility(View.VISIBLE);
 
-        HashMap<String, String> params = new HashMap<String, String>();
+        try {
 
-        params.put("userName", name);
-        params.put("nic", nic);
-        params.put("mobileNumber", mobile);
-        params.put("email", email);
+            // url to post the user data
+            String url = "http://192.168.1.11:8081/api/Supplier";
 
 
-        JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            VolleyLog.v("Response:%n %s", response.toString(4));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            HashMap<String, String> params = new HashMap<String, String>();
+
+            params.put("userName", name);
+            params.put("nic", nic);
+            params.put("mobileNumber", mobile);
+            params.put("email", email);
+
+
+            JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                VolleyLog.v("Response:%n %s", response.toString(4));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
-            }
-        });
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    VolleyLog.e("Error: ", error.getMessage());
+                }
+            });
 
-        requestQueue = Volley.newRequestQueue(StationOwnerRegisterActivity.this);
-        requestQueue.add(req);
+            requestQueue = Volley.newRequestQueue(StationOwnerRegisterActivity.this);
+            requestQueue.add(req);
+
+        }catch (Exception e){
+
+        }
+
+
 
     }
 
