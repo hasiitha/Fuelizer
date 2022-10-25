@@ -14,7 +14,12 @@ namespace Fuelizer.Services.Suppliers
             _fuelStation = database.GetCollection<FuelStation>(settings.FuelStationCollectionName);
 
         }
-  
+
+        public List<FuelStation> GetMyFuelStation(string OwnerId)
+        {
+            return _fuelStation.Find(fuelStation => fuelStation.OwnerId == OwnerId).ToList();
+        }
+
         FuelStation IFuelStationService.Create(FuelStation fuelStation)
         {
             _fuelStation.InsertOne(fuelStation);

@@ -6,34 +6,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MyPetrolStationList extends AppCompatActivity {
+public class MypetrolstationlistviewActivity extends AppCompatActivity {
+
     ListView stationList;
     SearchView searchView;
-    CustomerListAdapter listAdapter;
-    ImageView selectArrow;
+    PetrolStationAdapter listAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_petrol_station_list);
-
+        setContentView(R.layout.mypetrolstationlistview);
 
         stationList = (ListView) findViewById(R.id.stationListView);
         searchView = findViewById(R.id.searchbar_input);
 
-        MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(MyPetrolStationList.this);
+//        showListBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+
+        MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(MypetrolstationlistviewActivity.this);
         stationDataService.getAllStations(new StationDataService.VolleyResponseListener() {
             @Override
             public void onResponse(ArrayList<StationModel> stationModel) {
 //                        ArrayAdapter arrayAdapter = new ArrayAdapter(CustomerListView.this, android.R.layout.simple_list_item_1,stationModel);
-                listAdapter = new CustomerListAdapter(getApplicationContext(),stationModel);
+                listAdapter = new PetrolStationAdapter(getApplicationContext(),stationModel);
                 stationList.setAdapter(listAdapter);
                 stationList.setClickable(true);
                 stationList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -52,19 +54,22 @@ public class MyPetrolStationList extends AppCompatActivity {
 
             @Override
             public void onError(String message) {
-                Toast.makeText(MyPetrolStationList.this,message , Toast.LENGTH_LONG).show();
+                Toast.makeText(MypetrolstationlistviewActivity.this,message , Toast.LENGTH_LONG).show();
             }
         });
-
-
-        selectArrow = findViewById(R.id.selectArrow);
-
-        selectArrow.setOnClickListener(new View.OnClickListener() {
+//            }
+//
+//        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MyPetrolStationList.this, ViewMyPetrolStation.class);
-                intent.putExtra("stationId", "id");
-                startActivity(intent);
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                listAdapter.getFilter().filter(s);
+                return false;
             }
         });
     }

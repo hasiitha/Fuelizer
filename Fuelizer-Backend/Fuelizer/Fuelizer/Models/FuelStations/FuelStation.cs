@@ -18,6 +18,12 @@ namespace Fuelizer.Models.FuelStations
         public string Location { set; get; } = String.Empty;
         [BsonElement("status")]
         public bool OpenCloseStatus { set; get; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string OwnerId { set; get; } = String.Empty;
+
+
+
     }
 }
 

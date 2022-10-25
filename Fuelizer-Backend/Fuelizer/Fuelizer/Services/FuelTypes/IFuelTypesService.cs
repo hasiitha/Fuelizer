@@ -14,5 +14,8 @@ namespace Fuelizer.Services.FuelTypes
         void Update(string id, FuelType fuelType);
 
         void Remove(string id);
+
+        List<FuelType> GetFuelTypes(string id,string type);
+        List<FuelType> GetFuelTypesofStation(string stationId);
     }
 }
