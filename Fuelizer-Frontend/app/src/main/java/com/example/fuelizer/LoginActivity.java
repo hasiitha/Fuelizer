@@ -10,10 +10,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// this class is to login to the system
+
 public class LoginActivity extends AppCompatActivity {
 
     // initializing elements
-
     private TextView txtView_RegisterHere;
     private String userType;
     private Button btn_signIn;
@@ -36,8 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         editTxt_username = (EditText) findViewById(R.id.editTxt_username_login);
         editTxt_password = (EditText) findViewById(R.id.editTxt_password_login);
 
-//        username = editTxt_username.getText().toString();
-//        password = editTxt_password.getText().toString();
 
         // sign in button click
         btn_signIn.setOnClickListener(new View.OnClickListener() {
@@ -83,13 +82,11 @@ public class LoginActivity extends AppCompatActivity {
                 // navigating to vehicle or station owner registrations
                 switch (userType){
                     case "vehicleOwner":
-//                        Toast.makeText(LoginActivity.this, "vehicle", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, VehicalOwnerRegisterActivity.class);
                         intent.putExtra("userType", "vehicleOwner");
                         startActivity(intent);
                         break;
                     case "stationOwner":
-//                        Toast.makeText(LoginActivity.this, "station", Toast.LENGTH_SHORT).show();
                         Intent intent1 = new Intent(LoginActivity.this, StationOwnerRegisterActivity.class);
                         intent1.putExtra("userType", "stationOwner");
                         startActivity(intent1);
