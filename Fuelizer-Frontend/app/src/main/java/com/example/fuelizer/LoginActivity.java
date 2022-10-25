@@ -59,6 +59,10 @@ public class LoginActivity extends AppCompatActivity {
 
                         if(userType.equals(DB.USERTYPE)){
                             // API call for user login  (check usertype before call)
+                            if(userType.equals("vehicleOwner")){
+                                Intent intent = new Intent(LoginActivity.this, CustomerListView.class);
+                                startActivity(intent);
+                            }
                             Toast.makeText(LoginActivity.this, "Valid user !", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Incorrect user type !", Toast.LENGTH_SHORT).show();
