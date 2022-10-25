@@ -27,12 +27,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+//    this class is to register a vehicle owner to the system
+
 public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
     private TextView txtView_login_registeredUser;
     private EditText editTxt_username, editTxt_password, editTxt_nic, editTxt_mobile, editTxt_vehicleType, editTxt_fuelType, editTxt_vehicleNumber, editText_chasisNumber;
     private Button btn_register;
-//    private ProgressBar vehicleOwnerPB;
     private String userType;
     private DBHelper DB;
     private RequestQueue requestQueue;
@@ -57,10 +58,10 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
         editTxt_fuelType = findViewById(R.id.editTxt_Regis_fuelType);
         editTxt_vehicleNumber = findViewById(R.id.editTxt_Regis_vehicleNumber);
         editText_chasisNumber = findViewById(R.id.editTxt_Regis_chasisNumber);
-//        vehicleOwnerPB = findViewById(R.id.vehicle_owner_PB);
 
         btn_register = findViewById(R.id.btn_vehicleOwner_register);
 
+        // implementation for button to register the user
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +101,7 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
             }
         });
 
-        // redirecting to login page
+        // implementation to redirecting to login page
         txtView_login_registeredUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,14 +115,13 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
     }
 
+    // implementation to post the vehicle owner data to DB
     private void postDataToDB(String name, String nic, String mobile, String vType, String fType, String vNumber, String chasisNumber ){
 
         try {
-
             // url to post the user data
 //            String url = "http://192.168.1.11:8081/api/Customer";
             String url = "http://192.168.1.5:8080/api/Customer";
-
 
             HashMap<String, String> params = new HashMap<String, String>();
 
@@ -156,8 +156,6 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
         }catch (Exception e){
 
         }
-
-
 
     }
 

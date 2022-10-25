@@ -1,6 +1,8 @@
-﻿using Fuelizer.Models.FuelTypes;
+﻿using Fuelizer.Models.FuelStations;
+using Fuelizer.Models.FuelTypes;
 using Fuelizer.Models.Suppliers;
 using Fuelizer.Services.Customers;
+using Fuelizer.Services.FuelStations;
 using Fuelizer.Services.FuelTypes;
 using Fuelizer.Services.Suppliers;
 using Microsoft.AspNetCore.Mvc;
@@ -76,6 +78,16 @@ namespace Fuelizer.Controllers
             }
             fueltypesservice.Remove(fueltype.Id);
             return Ok($"supplier with id = {id} deleted");
+        }
+
+
+        // GET api/<FuelStationController>/5
+        [HttpGet("getFuelTypesofStation/{stationId}")]
+        public ActionResult<List<FuelType>> GetFuelTypesofStation(string stationId)
+        {
+
+
+            return fueltypesservice.GetFuelTypesofStation(stationId);
         }
 
         // GET: api/<FuelTypeController>/StationList

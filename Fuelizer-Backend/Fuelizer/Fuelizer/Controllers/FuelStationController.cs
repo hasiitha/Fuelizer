@@ -35,7 +35,7 @@ namespace Fuelizer.Controllers
             var supplier = fuelstationservice.Get(id);
             if (supplier == null)
             {
-                return NotFound($"supplier with id = {id} not found");
+                return NotFound($"fuelstation with id = {id} not found");
             }
             return supplier;
         }
@@ -76,6 +76,16 @@ namespace Fuelizer.Controllers
             }
             fuelstationservice.Remove(fuelStation.Id);
             return Ok($"fuel station with id = {id} deleted");
+        }
+
+
+        // GET api/<FuelStationController>/5
+        [HttpGet("getmyfuelstations/{ownerId}")]
+        public  ActionResult<List<FuelStation>> GetMyFuelStation(string ownerId)
+        {
+
+
+            return fuelstationservice.GetMyFuelStation(ownerId);
         }
 
 

@@ -14,7 +14,9 @@ namespace Fuelizer.Services.FuelStations;
         void Update(string id, FuelStation fuelStation);
 
         void Remove(string id);
-    }
+
+        List<FuelStation> GetMyFuelStation(string OwnerId);
+}
 
 
 
