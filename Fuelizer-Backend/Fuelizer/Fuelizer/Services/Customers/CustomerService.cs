@@ -39,5 +39,10 @@ namespace Fuelizer.Services.Customers
         {
             _customer.ReplaceOne(cus => cus.Id == id, customer);
         }
+
+        public Customer GetByName(string name)
+        {
+            return _customer.Find(customer => customer.UserName == name).FirstOrDefault();
+        }
     }
 }

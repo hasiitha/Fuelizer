@@ -1,5 +1,6 @@
 ﻿using Fuelizer.Models.FuelTypes;
 using Fuelizer.Models.Suppliers;
+using Fuelizer.Services.Customers;
 using Fuelizer.Services.FuelTypes;
 using Fuelizer.Services.Suppliers;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,12 @@ namespace Fuelizer.Controllers
     public class FuelTypeController : ControllerBase
     {
         private readonly IFuelTypesService fueltypesservice;
+        private readonly ICustomerService customerService;
 
-        public FuelTypeController(IFuelTypesService fueltypesservice )
+        public FuelTypeController(IFuelTypesService fueltypesservice , ICustomerService customerService)
         {
             this.fueltypesservice = fueltypesservice;
+            this.customerService = customerService;
 
         }
 
@@ -74,5 +77,20 @@ namespace Fuelizer.Controllers
             fueltypesservice.Remove(fueltype.Id);
             return Ok($"supplier with id = {id} deleted");
         }
+
+        // GET: api/<FuelTypeController>/StationList
+        [HttpGet("station/{id}/{type}")]
+        public ActionResult<List<FuelType>> GetFuelTypes(string id,string type)
+        {
+            var fueltype = fueltypesservice.GetFuelTypes(id,type);
+            //var Station = customerService.Get(id);
+            if (fueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            return fueltype;
+        }
+
+
     }
 }
