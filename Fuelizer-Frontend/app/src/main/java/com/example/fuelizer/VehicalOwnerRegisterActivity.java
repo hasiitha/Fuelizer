@@ -85,10 +85,11 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
                         Boolean insertSuccess = DB.insertData(uname, pw, userType);
 
+                        if(insertSuccess == true){
+                            Toast.makeText(VehicalOwnerRegisterActivity.this, "User Register Successfully !", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(VehicalOwnerRegisterActivity.this, LoginActivity.class);
                             intent.putExtra("userType", "vehicleOwner");
                             startActivity(intent);
-
                         }else {
                             Toast.makeText(VehicalOwnerRegisterActivity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
                         }

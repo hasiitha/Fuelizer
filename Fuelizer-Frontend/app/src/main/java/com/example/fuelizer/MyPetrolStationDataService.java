@@ -19,6 +19,7 @@ public class MyPetrolStationDataService {
 
     //Reference: https://www.youtube.com/watch?v=xPi-z3nOcn8&t=6488s&ab_channel=freeCodeCamp.org
     Context context;
+    String ownerId ="63565a4d34628adcf7ce4daf";
 
     public MyPetrolStationDataService(Context context) {
         this.context = context;
@@ -32,7 +33,7 @@ public class MyPetrolStationDataService {
     public void getAllStations(StationDataService.VolleyResponseListener volleyResponseListener){
         ArrayList<StationModel> stationModelList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://192.168.1.15:8081/api/FuelStation";
+        String url = "http://192.168.1.15:8081/api/FuelStation/getmyfuelstations/"+ownerId;
         //http://192.168.1.15:8081/api/FuelStation
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
             @Override

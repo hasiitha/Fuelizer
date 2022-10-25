@@ -41,5 +41,10 @@ namespace Fuelizer.Services.FuelTypes
         {
             _fueltype.ReplaceOne(sup => sup.Id == id, fuelType);
         }
+
+        public List<FuelType> GetFuelTypesofStation(string stationId)
+        {
+            return _fueltype.Find(fuelType => fuelType.StationId == stationId).ToList();
+        }
     }
 }
