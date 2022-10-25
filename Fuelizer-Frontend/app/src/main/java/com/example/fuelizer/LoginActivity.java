@@ -60,6 +60,8 @@ public class LoginActivity extends AppCompatActivity {
                         if(userType.equals(DB.USERTYPE)){
                             // API call for user login  (check usertype before call)
                             if(userType.equals("vehicleOwner")){
+                                //adding userName for global variable
+                                GlobalVariables.userName = uname;
                                 Intent intent = new Intent(LoginActivity.this, CustomerListView.class);
                                 startActivity(intent);
                             }
