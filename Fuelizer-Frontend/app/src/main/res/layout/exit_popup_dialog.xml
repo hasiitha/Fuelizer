@@ -40,6 +40,7 @@
         android:layout_height="60dp"
         android:backgroundTint="@color/white"
         android:hint="20L"
+        android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/filled_Amount_Btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -56,11 +57,13 @@
         app:layout_constraintTop_toBottomOf="@+id/filled_Amount_editText" />
 
     <Button
+        android:id="@+id/leaveQueueBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="256dp"
         android:background="@color/darkRed"
         android:padding="5dp"
+        android:layout_marginBottom="20dp"
         android:text="Leave without Filling"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

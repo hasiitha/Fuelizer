@@ -76,5 +76,17 @@ namespace Fuelizer.Controllers
             customerService.Remove(customer.Id);
             return Ok($"Customer with id = {id} deleted");
         }
+
+        // GET api/<CustomerController>/ByName
+        [HttpGet("ByName/{name}")]
+        public ActionResult<Customer> GetByName(string name)
+        {
+            var customer = customerService.GetByName(name);
+            if (customer == null)
+            {
+                return NotFound($"customer with id = {name} not found");
+            }
+            return customer;
+        }
     }
 }

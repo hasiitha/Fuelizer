@@ -15,7 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+/*
+IT18014396
+In this class i created the custom list adapter to display the customized list view.
 
+ */
 public class CustomerListAdapter extends ArrayAdapter<StationModel> {
     //Reference: https://www.youtube.com/watch?v=RHqGiWluAzU&ab_channel=Foxandroid
     public CustomerListAdapter(@NonNull Context context, ArrayList<StationModel> stationArrayList) {

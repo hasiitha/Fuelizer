@@ -1,6 +1,7 @@
 ﻿using Fuelizer.Models.FuelStations;
 using Fuelizer.Models.FuelTypes;
 using Fuelizer.Models.Suppliers;
+using Fuelizer.Services.Customers;
 using Fuelizer.Services.FuelStations;
 using Fuelizer.Services.FuelTypes;
 using Fuelizer.Services.Suppliers;
@@ -15,10 +16,12 @@ namespace Fuelizer.Controllers
     public class FuelTypeController : ControllerBase
     {
         private readonly IFuelTypesService fueltypesservice;
+        private readonly ICustomerService customerService;
 
-        public FuelTypeController(IFuelTypesService fueltypesservice )
+        public FuelTypeController(IFuelTypesService fueltypesservice , ICustomerService customerService)
         {
             this.fueltypesservice = fueltypesservice;
+            this.customerService = customerService;
 
         }
 
@@ -87,8 +90,20 @@ namespace Fuelizer.Controllers
             return fueltypesservice.GetFuelTypesofStation(stationId);
         }
 
+        // GET: api/<FuelTypeController>/StationList
+        [HttpGet("station/{id}/{type}")]
+        public ActionResult<List<FuelType>> GetFuelTypes(string id,string type)
+        {
+            var fueltype = fueltypesservice.GetFuelTypes(id,type);
+            //var Station = customerService.Get(id);
+            if (fueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            return fueltype;
+        }
 
-        // PUT api/<FuelTypeController>/5
+// PUT api/<FuelTypeController>/5
         [HttpPut("toUpdateArrivals/{id}")]
         public ActionResult PutToArrivals(string id, string arrivaltime)
         {
@@ -144,6 +159,28 @@ namespace Fuelizer.Controllers
             return NoContent();
 
         }
+        
+           // PUT api/<FuelTypeController>/6
+        [HttpPut("toUpdateQueue/{id}")]
+        public ActionResult PutToQueue(string id, String carCount, String vanCount, String bikeCount, String tukCount, String lorryCount, String remFuel)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            existingfueltype.NoOfCars = carCount;
+            existingfueltype.NoOfVans = vanCount;
+            existingfueltype.NoOfMotocycles = bikeCount;
+            existingfueltype.NoOfTrishaw = tukCount;
+            existingfueltype.NoOfLorries = lorryCount;
+            existingfueltype.Remainder = remFuel;
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
+        
 
     }
 }
