@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class ViewMyPetrolStation extends AppCompatActivity {
     private Button selectStation;
-    Button petrol_btn;
+    Button petrol_btn,petrol_btn_updatestock;
     String stationName;
     String stationId;
     String stationStatus;
@@ -116,7 +116,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
 //                arrivalTimeSuperDiesel.setText(petrol92remain);
 
 //
-               petrol_btn = findViewById(R.id.h_btn_nextarrival_patrol);
+                petrol_btn = findViewById(R.id.h_btn_nextarrival_patrol);
 
                 String petrolItemId = (fuelType.get("petrol").getId());
                 petrol_btn.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +128,23 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+                String petrol95ItemId = (fuelType.get("petrol95").getId());
+                petrol_btn_updatestock = findViewById(R.id.h_update_petrol92_vol);
+
+                petrol_btn_updatestock.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewMyPetrolStation.this, UpdateStationStorage.class);
+                        intent.putExtra("itemId", petrol95ItemId);
+                        intent.putExtra("itemType","petrol");
+                        startActivity(intent);
+                    }
+                });
+
+
+                ;
+
+
 
             }
 

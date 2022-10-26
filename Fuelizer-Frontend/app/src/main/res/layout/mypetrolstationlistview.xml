@@ -4,44 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkRed"
     android:visibility="visible"
-    tools:context=".MypetrolstationlistviewActivity"
-    android:background="@color/cream">
+    tools:context=".MypetrolstationlistviewActivity">
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
         android:text="MY Fuel Stations"
         android:textColor="@color/darkBlue"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ListView
-        android:id="@+id/stationListView"
-        android:layout_width="409dp"
-        android:layout_height="635dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/activity_my_petrol_station_list" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
-    <SearchView
-        android:id="@+id/searchbar_input"
-        android:layout_width="330dp"
-        android:layout_height="34dp"
-        app:layout_constraintBottom_toTopOf="@+id/stationListView"
+    <ListView
+        android:id="@+id/stationListView"
+        android:layout_width="391dp"
+        android:layout_height="617dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/searchbar"
-        android:queryHint="Search Fuel Stations"
-        android:requiresFadingEdge="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:layout_constraintVertical_bias="0.129"
+        tools:listitem="@layout/activity_my_petrol_station_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

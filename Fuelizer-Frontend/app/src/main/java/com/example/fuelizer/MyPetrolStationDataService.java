@@ -1,12 +1,16 @@
 package com.example.fuelizer;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -15,6 +19,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MyPetrolStationDataService {
 
@@ -26,6 +31,8 @@ public class MyPetrolStationDataService {
     public MyPetrolStationDataService(Context context) {
         this.context = context;
     }
+
+
 
     public interface VolleyResponseListener{
         void onResponse(ArrayList<StationModel> stationModel);
@@ -135,4 +142,50 @@ public class MyPetrolStationDataService {
         });
         queue.add(request);
     }
+
+
+    public interface VolleyResponseListenerUpdateArrivalDate{
+        void onResponse(String msg);
+        void onError(String message);
+    }
+
+
+
+    public void updateFuelArrivals(VolleyResponseListenerUpdateArrivalDate updateFuelArrivalsResponseListener,String typeID,String date){
+
+     RequestQueue queue = Volley.newRequestQueue(context);
+
+     //String url = URI+"FuelType/toUpdateQueue/"+typeID+"?carCount="+noCars+"&vanCount="+noVans+"&bikeCount="+noBikes+"&tukCount="+noTuks+"&lorryCount="+noLorries;
+        String url = "http://192.168.1.15:8081/api/FuelType/toUpdateArrivals/"+typeID+"?arrivaltime="+date;
+
+
+       StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>()
+               {
+                  @Override
+                    public void onResponse(String response) {
+                      updateFuelArrivalsResponseListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                        updateFuelArrivalsResponseListener.onError("Error Updating Queue!!!");
+                    }
+                }
+        );
+
+        queue.add(putRequest);
+
+
+
+
+
+    }
+
+
+
 }

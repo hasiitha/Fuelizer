@@ -90,7 +90,7 @@ namespace Fuelizer.Controllers
 
         // PUT api/<FuelTypeController>/5
         [HttpPut("toUpdateArrivals/{id}")]
-        public ActionResult PutToArrivals(string id, [FromBody] String arrivaltime)
+        public ActionResult PutToArrivals(string id, string arrivaltime)
         {
             var existingfueltype = fueltypesservice.Get(id);
             if (existingfueltype == null)

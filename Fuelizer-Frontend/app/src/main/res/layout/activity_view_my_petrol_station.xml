@@ -54,16 +54,8 @@
             <TextView
                 android:id="@+id/h_petrol_remain"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/h_petrol_remain"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/h_petral_remain"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="L / "
+                android:text="@string/h_petrol_remain"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
@@ -83,7 +75,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/h_update_petrol92_vol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
@@ -127,7 +119,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/h_update_petrol95_vol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
@@ -171,7 +163,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button9"
+                android:id="@+id/h_update_diesel_vol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
@@ -215,7 +207,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/button11"
+                android:id="@+id/h_update_superdiesel_vol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
@@ -285,7 +277,7 @@
         </TableRow>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/h_btn_nextarrival_petrol95"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Next Arrival Petrol 95" />
@@ -314,7 +306,7 @@
         </TableRow>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/h_btn_nextarrival_diesel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Next Arrival Diesel" />
@@ -343,7 +335,7 @@
         </TableRow>
 
         <Button
-            android:id="@+id/button12"
+            android:id="@+id/h_btn_nextarrival_superdiesel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Next Arrival Super Diesel" />
@@ -351,7 +343,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/h_updateStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="update status"
@@ -371,7 +363,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/button13"
+        app:layout_constraintBottom_toTopOf="@+id/h_updateStatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"

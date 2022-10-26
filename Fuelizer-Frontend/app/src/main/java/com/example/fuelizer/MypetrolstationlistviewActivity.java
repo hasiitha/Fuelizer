@@ -62,17 +62,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
 //            }
 //
 //        });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                listAdapter.getFilter().filter(s);
-                return false;
-            }
-        });
+
     }
 }
