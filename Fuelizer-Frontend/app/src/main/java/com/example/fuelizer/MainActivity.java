@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-// this class is to choose the user category type
+/*
+* this class is to choose the user category type
+* */
+
 
 public class MainActivity extends AppCompatActivity {
 

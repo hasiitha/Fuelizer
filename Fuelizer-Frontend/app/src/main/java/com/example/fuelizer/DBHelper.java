@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-// this class has implemented all the functions to the local sqlite database
+/*
+*   this class has implemented all the functions to the local sqlite database
+* */
+
 
 public class DBHelper extends SQLiteOpenHelper {
 
