@@ -40,9 +40,12 @@
             />
 
         <TableRow
+            android:id="@+id/p92row"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
             <TextView
+                android:id="@+id/labelpetrol92"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Petrol 92"
@@ -58,6 +61,7 @@
                 android:textStyle="bold"
                 android:text="5400"/>
             <TextView
+                android:id="@+id/p92slash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
@@ -71,6 +75,7 @@
                 android:textStyle="bold"
                 android:text="6000"/>
             <TextView
+                android:id="@+id/p92l"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
@@ -78,6 +83,8 @@
                 android:text="L"/>
         </TableRow>
         <TableRow
+            android:id="@+id/p95row"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
             <TextView
@@ -116,6 +123,8 @@
                 android:text="L"/>
         </TableRow>
         <TableRow
+            android:id="@+id/drow"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
             <TextView
@@ -154,6 +163,8 @@
                 android:text="L"/>
         </TableRow>
         <TableRow
+            android:id="@+id/superdrow"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
             <TextView
@@ -386,6 +397,7 @@
         android:background="@color/green"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/departedBtn"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

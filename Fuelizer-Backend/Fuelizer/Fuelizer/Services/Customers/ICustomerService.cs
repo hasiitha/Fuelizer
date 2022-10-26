@@ -13,5 +13,7 @@ namespace Fuelizer.Services.Customers
         void Update(string id, Customer customer);
 
         void Remove(string id);
+
+        Customer GetByName(string name);
     }
 }
