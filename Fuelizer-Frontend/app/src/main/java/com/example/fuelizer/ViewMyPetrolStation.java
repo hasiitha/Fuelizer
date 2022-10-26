@@ -10,8 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
-
+/*
+* Class to view the petrol stations and to navigate to the update methods
+* */
 public class ViewMyPetrolStation extends AppCompatActivity {
+    // viewing the petrol station details
     private Button selectStation;
     Button petrol_btn,petrol_btn_updatestock;
     String stationName;
@@ -58,7 +61,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                 //String dieselArrivalTime = (fuelType.get("diesel").getRemainder());
 
 
-                String superDieselRemain = (fuelType.get("superdiesel").getRemainder())+"L/";;
+                String superDieselRemain = ("      "+fuelType.get("superdiesel").getRemainder())+"L/";;
                 String superDieselCapacity = (fuelType.get("superdiesel").getCapacity());
                 String superDieselArrivalDateTime = (fuelType.get("superdiesel").getArrivalTime());
                 //String superDieselArrivalTime = (fuelType.get("superdiesel").getRemainder());

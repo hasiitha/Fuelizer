@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/*A class to do the http request using volley for fuel stations*/
 public class MyPetrolStationDataService {
 
     //Reference: https://www.youtube.com/watch?v=xPi-z3nOcn8&t=6488s&ab_channel=freeCodeCamp.org
@@ -38,7 +38,7 @@ public class MyPetrolStationDataService {
         void onResponse(ArrayList<StationModel> stationModel);
         void onError(String message);
     }
-
+//gett all request
     public void getAllStations(MyPetrolStationDataService.VolleyResponseListener volleyResponseListener){
         ArrayList<StationModel> stationModelList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -150,7 +150,7 @@ public class MyPetrolStationDataService {
     }
 
 
-
+//update fuel types in fuel stations
     public void updateFuelArrivals(VolleyResponseListenerUpdateArrivalDate updateFuelArrivalsResponseListener,String typeID,String date){
 
      RequestQueue queue = Volley.newRequestQueue(context);

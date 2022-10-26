@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cream">
+    android:background="@color/darkRed"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/staionItem"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="7dp"
-        android:background="@color/lightBlue">
+        android:background="@color/darkBlue">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -64,7 +64,6 @@
 
         </ImageView>
     </RelativeLayout>
-
 
 
 </LinearLayout>

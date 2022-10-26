@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/*Petrol station List
+* */
 public class MypetrolstationlistviewActivity extends AppCompatActivity {
 
     ListView stationList;

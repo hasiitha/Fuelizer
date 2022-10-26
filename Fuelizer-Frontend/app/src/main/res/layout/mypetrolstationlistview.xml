@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkRed"
+    android:background="@color/design_default_color_error"
     android:visibility="visible"
     tools:context=".MypetrolstationlistviewActivity">
 
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="MY Fuel Stations"
+        android:text="My Fuel Stations"
         android:textColor="@color/darkBlue"
         android:textSize="34sp"
         android:textStyle="bold"
