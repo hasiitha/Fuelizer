@@ -24,6 +24,9 @@ public class StationDetailsActivity extends AppCompatActivity {
     TextView stationName,p92rem,p92full,p95rem,p95full,s92rem,s95full,s95rem,s92full;
     TextView noCar,noVan,noBike,noTrishaw,noLorry,arrivalTime;
     TableRow petrolNormal_row,petrolSuper_row,diselNormal_row,diselSuper_row;
+    String typeID,stationID,fuelType,remainder,capacity,noCars,noVans,noBikes,noTuks,noLorries,aTime;
+    boolean fnish;
+    int updateNo = 0;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -63,10 +66,10 @@ public class StationDetailsActivity extends AppCompatActivity {
         stationName.setText(name);
 
 //        System.out.println(GlobalVariables.userFuelType.toUpperCase());
-        if(GlobalVariables.userFuelType.equals("Petrol") || GlobalVariables.userFuelType.equals("Petrol95")){
+        if(GlobalVariables.userFuelType.equals("Petrol92") || GlobalVariables.userFuelType.equals("Petrol95")){
             diselSuper_row.setVisibility(View.GONE);
             diselNormal_row.setVisibility(View.GONE);
-        }else if(GlobalVariables.userFuelType.equals("Disel") || GlobalVariables.userFuelType.equals("Super Disel")){
+        }else if(GlobalVariables.userFuelType.equals("Diesel") || GlobalVariables.userFuelType.equals("SuperDiesel")){
             petrolSuper_row.setVisibility(View.GONE);
             petrolNormal_row.setVisibility(View.GONE);
         }
@@ -77,10 +80,10 @@ public class StationDetailsActivity extends AppCompatActivity {
         dataService.getFuelStationDetails(new StationDataService.FuelDataResponseListener() {
             @Override
             public void onResponse(FuelStationDetailsModel stationModel) {
-                if(stationModel.getType().equals("Petrol")){
+                if(stationModel.getType().equals("Petrol92")||stationModel.getType().equals("Petrol95")){
                     p92rem.setText(stationModel.getRemainder());
                     p92full.setText(stationModel.getCapacity());
-                }else if(stationModel.getType().equals("Disel")){
+                }else if(stationModel.getType().equals("Diesel") || stationModel.getType().equals("SuperDiesel")){
                     s92rem.setText(stationModel.getRemainder());
                     s92full.setText(stationModel.getCapacity());
                 }
@@ -90,6 +93,19 @@ public class StationDetailsActivity extends AppCompatActivity {
                 noTrishaw.setText(stationModel.getNoOfTrishaw());
                 noLorry.setText(stationModel.getNoOfLorries());
                 arrivalTime.setText(stationModel.getArrivalTime());
+
+                typeID = stationModel.getId();
+                stationID= stationModel.getStationID();
+                fuelType = stationModel.getType();
+                remainder = stationModel.getRemainder();
+                capacity = stationModel.getCapacity();
+                noCars = stationModel.getNoOfCars();
+                noVans = stationModel.getNoOfVans();
+                noBikes = stationModel.getNoOfMotocycles();
+                noTuks = stationModel.getNoOfTrishaw();
+                noLorries = stationModel.getNoOfLorries();
+                aTime = stationModel.getArrivalTime();
+                fnish = stationModel.isFinish();
 
 
             }
@@ -110,8 +126,46 @@ public class StationDetailsActivity extends AppCompatActivity {
         btnArrived.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(StationDetailsActivity.this, "Arrival Noted", Toast.LENGTH_LONG).show();
-                checkingToStation();
+                StationDataService stationDataService = new StationDataService(StationDetailsActivity.this);
+                String vehicleType = GlobalVariables.userVehicle;
+                switch (vehicleType){
+                    case "Car":
+                        updateNo = Integer.parseInt(noCars);
+                        updateNo = updateNo + 1;
+                        noCars = Integer.toString(updateNo);
+                        break;
+                    case "Van":
+                        updateNo = Integer.parseInt(noVans);
+                        updateNo = updateNo + 1;
+                        noVans = Integer.toString(updateNo);
+                        break;
+                    case "Motorcycle":
+                        updateNo = Integer.parseInt(noBikes);
+                        updateNo = updateNo + 1;
+                        noBikes = Integer.toString(updateNo);
+                        break;
+                    case "Trishaw":
+                        updateNo = Integer.parseInt(noTuks);
+                        updateNo = updateNo + 1;
+                        noTuks = Integer.toString(updateNo);
+                        break;
+                    case "Lorry":
+                        updateNo = Integer.parseInt(noLorries);
+                        updateNo = updateNo + 1;
+                        noLorries = Integer.toString(updateNo);
+                        break;
+                }
+                stationDataService.updateFuelQueue(new StationDataService.UpdateFuelQueueResponseListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(StationDetailsActivity.this, "SuCCESS"+response, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(StationDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                }, typeID, stationID, fuelType, remainder, capacity, noCars, noVans, noBikes, noTuks, noLorries, aTime, fnish);
             }
         });
     }
@@ -129,15 +183,5 @@ public class StationDetailsActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void checkingToStation(){
 
-
-//        Toast.makeText(this, GlobalVariables.userVehicle, Toast.LENGTH_SHORT).show();
-        if(GlobalVariables.userVehicle.equals("Car")){
-//            int newCarCount = parseInt(detailsModel.getNoOfCars()) + 1;
-//            Toast.makeText(this, newCarCount, Toast.LENGTH_SHORT).show();
-        }else if(GlobalVariables.userVehicle.equals("Van")){
-//            int newVanCount = parseInt(detailsModel.getNoOfVans()) + 1;
-        }
-    }
 }

@@ -1,6 +1,7 @@
 package com.example.fuelizer;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,7 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StationDataService {
 
@@ -78,7 +81,8 @@ public class StationDataService {
     public void getUserDetails(UserDetailsResponseListener userDetailsResponseListener){
         RequestQueue queue = Volley.newRequestQueue(context);
         CustomerModel customerModel = new CustomerModel();
-        String url = "http://192.168.1.5:8080/api/Customer/ByName/"+GlobalVariables.userName;
+        String url = "http://192.168.1.5:8080/api/Customer/ByName/locha";
+//                +GlobalVariables.userName;
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -159,5 +163,68 @@ public class StationDataService {
             }
         });
         queue.add(request);
+    }
+
+    public interface UpdateFuelQueueResponseListener{
+        void onResponse(String response);
+        void onError(String message);
+    }
+
+    public void updateFuelQueue(UpdateFuelQueueResponseListener updateFuelQueueResponseListener,String typeID, String stationID, String fuelType, String remainder, String capacity, String noCars, String noVans, String noBikes, String noTuks, String noLorries, String aTime, boolean fnish){
+        FuelStationDetailsModel detailsModel = new FuelStationDetailsModel();
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = "http://192.168.1.5:8080/api/FuelType/"+typeID;
+
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+//                        Log.d("Response", response);
+                        updateFuelQueueResponseListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                        updateFuelQueueResponseListener.onError("Error Updating Queue!!!");
+                    }
+                }
+        ) {
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String> ();
+                params.put("id", typeID);
+                params.put("stationId", stationID);
+                params.put("type", fuelType);
+                params.put("remainder", remainder);
+                params.put("capacity", capacity);
+                params.put("noOfCars", noCars);
+                params.put("noOfVans", noVans);
+                params.put("noOfMotocycles", noBikes);
+                params.put("noOfLorries", noLorries);
+                params.put("noOfTrishaw", noTuks);
+                params.put("arrivalTime", aTime);
+                params.put("finish", "");
+
+                return params;
+            }
+
+        };
+
+        queue.add(putRequest);
+
+
+
+
+
     }
 }
