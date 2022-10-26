@@ -86,5 +86,22 @@ namespace Fuelizer.Controllers
 
             return fueltypesservice.GetFuelTypesofStation(stationId);
         }
+
+
+        // PUT api/<FuelTypeController>/5
+        [HttpPut("toUpdateArrivals/{id}")]
+        public ActionResult PutToArrivals(string id, [FromBody] String arrivaltime)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            existingfueltype.ArrivalTime = arrivaltime;
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
     }
 }

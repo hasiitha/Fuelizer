@@ -6,4 +6,18 @@
     <string name="register">Register</string>
     <string name="AddStation">addStation</string>
     <string name="Add">Add</string>
+    <string name="st_name">Malabe</string>
+    <string name="petrolval">4000</string>
+    <string name="h_petrol95remain">200</string>
+    <string name="h_diesel_remain_val">200</string>
+    <string name="h_superdiesel_remain">200</string>
+    <string name="h_petrol_capacity">500</string>
+    <string name="h_petrol95_capacity">5000</string>
+    <string name="h_diesel_capacity">5000</string>
+    <string name="h_superdiesel_capacity" />
+    <string name="h_petrol95_arrive">20/10/2022 12:50 AM</string>
+    <string name="h_petrol_arrival">20/10/2022 12:50 AM</string>
+    <string name="h_diesel_arrive">20/10/2022 12:51 AM</string>
+    <string name="h_superdiesel_arrive">20/10/2022 12:50 AM</string>
+    <string name="h_petrol_remain" />
 </resources>

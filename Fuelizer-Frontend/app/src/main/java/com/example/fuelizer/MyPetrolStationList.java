@@ -29,7 +29,7 @@ public class MyPetrolStationList extends AppCompatActivity {
         searchView = findViewById(R.id.searchbar_input);
 
         MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(MyPetrolStationList.this);
-        stationDataService.getAllStations(new StationDataService.VolleyResponseListener() {
+        stationDataService.getAllStations(new MyPetrolStationDataService.VolleyResponseListener() {
             @Override
             public void onResponse(ArrayList<StationModel> stationModel) {
 //                        ArrayAdapter arrayAdapter = new ArrayAdapter(CustomerListView.this, android.R.layout.simple_list_item_1,stationModel);
@@ -44,6 +44,7 @@ public class MyPetrolStationList extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(),StationDetailsActivity.class);
                         intent.putExtra("name", stationModel.get(i).getStation_name());
                         intent.putExtra("ID",stationModel.get(i).getId());
+                        intent.putExtra("location",stationModel.get(i).getLocation());
                         startActivity(intent);
                     }
                 });

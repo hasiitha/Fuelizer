@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Fuelizer"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Update_Next_Arrival_Stock"
+            android:exported="false" />
+        <activity
             android:name=".MypetrolstationlistviewActivity"
             android:exported="false" />
         <activity
