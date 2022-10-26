@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                                 //adding userName for global variable
                                 GlobalVariables.userName = uname;
                                 Intent intent = new Intent(LoginActivity.this, CustomerListView.class);
+                                intent.putExtra("username", uname);
                                 startActivity(intent);
                             }
                             Toast.makeText(LoginActivity.this, "Valid user !", Toast.LENGTH_SHORT).show();
