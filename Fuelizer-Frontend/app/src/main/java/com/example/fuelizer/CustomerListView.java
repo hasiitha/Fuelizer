@@ -22,11 +22,14 @@ public class CustomerListView extends AppCompatActivity {
     ListView stationList;
     SearchView searchView;
     CustomerListAdapter listAdapter;
+    private String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list_view);
+
+        userName = getIntent().getStringExtra("username");
 
         stationList = (ListView) findViewById(R.id.stationListView);
         searchView = findViewById(R.id.searchbar_input);
