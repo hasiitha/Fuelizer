@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/*Petrol station List
+* */
 public class MypetrolstationlistviewActivity extends AppCompatActivity {
 
     ListView stationList;
@@ -31,7 +33,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
 //            public void onClick(View view) {
 
         MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(MypetrolstationlistviewActivity.this);
-        stationDataService.getAllStations(new StationDataService.VolleyResponseListener() {
+        stationDataService.getAllStations(new MyPetrolStationDataService.VolleyResponseListener() {
             @Override
             public void onResponse(ArrayList<StationModel> stationModel) {
 //                        ArrayAdapter arrayAdapter = new ArrayAdapter(CustomerListView.this, android.R.layout.simple_list_item_1,stationModel);
@@ -43,9 +45,11 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         System.out.println("Clicked One:" + i);
-                        Intent intent = new Intent(getApplicationContext(),StationDetailsActivity.class);
+                        Intent intent = new Intent(getApplicationContext(),ViewMyPetrolStation.class);
                         intent.putExtra("name", stationModel.get(i).getStation_name());
                         intent.putExtra("ID",stationModel.get(i).getId());
+                        intent.putExtra("location",stationModel.get(i).getLocation());
+                        intent.putExtra("status",stationModel.get(i).isStatus());
                         startActivity(intent);
                     }
                 });
@@ -60,17 +64,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
 //            }
 //
 //        });
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String s) {
-                listAdapter.getFilter().filter(s);
-                return false;
-            }
-        });
+
     }
 }

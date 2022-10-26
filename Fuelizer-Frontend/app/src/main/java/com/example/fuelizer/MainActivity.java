@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-// this class is to choose the user category type
+/*
+* this class is to choose the user category type
+* */
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_v_owner, btn_s_owner, haitha_btn;
+    private Button btn_v_owner, btn_s_owner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         btn_v_owner=findViewById(R.id.btn_vehical_owner);
         btn_s_owner = findViewById(R.id.btn_station_owner);
-        haitha_btn = findViewById(R.id.haitha_btn);
 
         // button click for vehicle owner
         btn_v_owner.setOnClickListener(new View.OnClickListener() {
@@ -42,14 +44,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        haitha_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PetrolStationRegistration.class);
 
-                startActivity(intent);
-            }
-        });
 
     }
 }

@@ -53,8 +53,8 @@ public class PetrolStationRegistration extends AppCompatActivity {
                 }else {
 
 
-                        postDataToDB(stationName,location,status);
-                    Toast.makeText(PetrolStationRegistration.this, "Station  Registered Successfully !", Toast.LENGTH_SHORT).show();
+//                        postDataToDB(stationName,location,status);
+//                    Toast.makeText(PetrolStationRegistration.this, "Station  Registered Successfully !", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(PetrolStationRegistration.this, MypetrolstationlistviewActivity.class);
                 intent.putExtra("stationId", "id");
                 startActivity(intent);

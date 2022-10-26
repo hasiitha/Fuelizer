@@ -13,6 +13,15 @@
         android:theme="@style/Theme.Fuelizer"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".OwnerMenue"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateStationStorage"
+            android:exported="false" />
+        <activity
+            android:name=".Update_Next_Arrival_Stock"
+            android:exported="false" />
+        <activity
             android:name=".MypetrolstationlistviewActivity"
             android:exported="false" />
         <activity

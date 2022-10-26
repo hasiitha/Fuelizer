@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cream"
+    android:background="@color/darkRed"
     tools:context=".StationDetailsActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="385dp"
-        android:layout_height="568dp"
+        android:layout_height="600dp"
         android:layout_marginTop="16dp"
         android:background="@color/darkBlue"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.384"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/stationName_txt"
+            android:id="@+id/st_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="5dp"
-            android:text="Ceypetco malabe"
+            android:text="@string/st_name"
             android:textColor="@color/white"
             android:textSize="20dp" />
 
@@ -52,25 +52,18 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/p92Rem_txt"
+                android:id="@+id/h_petrol_remain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5400"
+                android:text="@string/h_petrol_remain"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/h_petrol_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="L / "
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/p92Full_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6000"
+                android:text="@string/h_petrol_capacity"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
@@ -80,6 +73,12 @@
                 android:text="L"
                 android:textSize="17dp"
                 android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/h_update_petrol92_vol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UPDATE" />
 
         </TableRow>
 
@@ -97,14 +96,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/p95Rem_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5400"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
+                android:id="@+id/h_petrol95_remain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="L / "
@@ -112,10 +104,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/p95Full_txt"
+                android:id="@+id/h_petrol95_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="6000"
+                android:text="@string/h_petrol95_capacity"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
@@ -125,6 +117,12 @@
                 android:text="L"
                 android:textSize="17dp"
                 android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/h_update_petrol95_vol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UPDATE" />
 
         </TableRow>
 
@@ -142,14 +140,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dRem_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5400"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
+                android:id="@+id/h_diesel_remain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="L / "
@@ -157,7 +148,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dFull_txt"
+                android:id="@+id/h_diesel_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6000"
@@ -171,6 +162,12 @@
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/h_update_diesel_vol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UPDATE" />
+
         </TableRow>
 
         <TableRow
@@ -181,21 +178,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:text="Super Disel"
+                android:text="SuperDiesel    "
                 android:textColor="@color/white"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dSuperRem_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:text="5400"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
+                android:id="@+id/h_superdiesel_remain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="L / "
@@ -203,7 +192,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dSuperFull_txt"
+                android:id="@+id/h_superdiesel_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6000"
@@ -217,131 +206,12 @@
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
-        </TableRow>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="Vehicles in Queue"
-            android:textColor="@color/lightBlue"
-            android:textSize="18dp" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
+            <Button
+                android:id="@+id/h_update_superdiesel_vol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:text="Cars                "
-                android:textColor="@color/white"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+                android:text="UPDATE" />
 
-            <TextView
-                android:id="@+id/carCount_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:text="20"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:text="Vans               "
-                android:textColor="@color/white"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/vanCount_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:text="20"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:text="Motorcycles  "
-                android:textColor="@color/white"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/motoCount_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:text="20"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:text="Three Wheels"
-                android:textColor="@color/white"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/triShawCount_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:text="20"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:text="Lorries            "
-                android:textColor="@color/white"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/lorryCount_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:text="20"
-                android:textSize="17dp"
-                android:textStyle="bold" />
         </TableRow>
 
         <TextView
@@ -368,7 +238,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/pArriveDate_txt"
+                android:id="@+id/h_petrol_arrive_i"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -376,6 +246,41 @@
                 android:textSize="17dp"
                 android:textStyle="bold" />
         </TableRow>
+
+        <Button
+            android:id="@+id/h_btn_nextarrival_patrol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Next ArrivalPetrol 92" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:text="Petrol95"
+                android:textColor="@color/white"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/h_pertrol95_arrive_i"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:text="20/10/2022 11:50 AM"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <Button
+            android:id="@+id/h_btn_nextarrival_petrol95"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Next Arrival Petrol 95" />
 
         <TableRow
             android:layout_width="match_parent"
@@ -391,7 +296,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dArriveDate_txt"
+                android:id="@+id/h_diesel_arrive_i"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -399,6 +304,12 @@
                 android:textSize="17dp"
                 android:textStyle="bold" />
         </TableRow>
+
+        <Button
+            android:id="@+id/h_btn_nextarrival_diesel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Next Arrival Diesel" />
 
         <TableRow
             android:layout_width="match_parent"
@@ -408,13 +319,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
-                android:text="Disel  "
+                android:text="Super Diesel"
                 android:textColor="@color/white"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dArriveDate95"
+                android:id="@+id/h_superdiesel_arrive_i"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
@@ -423,54 +334,39 @@
                 android:textStyle="bold" />
         </TableRow>
 
-        <TableRow
+        <Button
+            android:id="@+id/h_btn_nextarrival_superdiesel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:text="Add Next Arrival Super Diesel" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:text="Disel  "
-                android:textColor="@color/white"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/dArriveDate_95"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:text="20/10/2022 11:50 AM"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-        </TableRow>
     </LinearLayout>
 
     <Button
-        android:id="@+id/arrivedBtn"
-        android:layout_width="199dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/green"
-        android:text="ARRIVED"
-        android:textColor="#795548"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:id="@+id/h_updateStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update status"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="203dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="OPEN"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/h_updateStatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.428" />
 
-    <Button
-        android:id="@+id/departedBtn"
-        android:layout_width="199dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="23dp"
-        android:background="@color/darkRed"
-        android:text="DEPARTED"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arrivedBtn"
-        tools:layout_editor_absoluteX="112dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

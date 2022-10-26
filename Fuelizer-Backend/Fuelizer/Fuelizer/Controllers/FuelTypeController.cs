@@ -103,6 +103,21 @@ namespace Fuelizer.Controllers
             return fueltype;
         }
 
+// PUT api/<FuelTypeController>/5
+        [HttpPut("toUpdateArrivals/{id}")]
+        public ActionResult PutToArrivals(string id, string arrivaltime)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            existingfueltype.ArrivalTime = arrivaltime;
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
         // PUT api/<FuelTypeController>/5
         [HttpPut("toUpdateArrivals/{id}")]
         public ActionResult PutToArrivals(string id, [FromBody] String arrivaltime)

@@ -30,7 +30,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-//    this class is to register a vehicle owner to the system
+/*
+* this class is to register a vehicle owner to the system
+* */
 
 public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
