@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// this class is to login to the system
+/*
+*   this class is to login to the system
+* */
 
 public class LoginActivity extends AppCompatActivity {
 
