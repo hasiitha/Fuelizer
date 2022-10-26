@@ -8,8 +8,10 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -17,8 +19,13 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+/*
+IT18014396
+ implementation of fuel station details such as remaining fuel, number of vehicles in the queue and customer arrival and departure parts done in this class.
+ */
 public class StationDetailsActivity extends AppCompatActivity {
 
+    //variables
     private Button btnArrived,btnDeparted;
     String name,id;
     TextView stationName,p92rem,p92full,p95rem,p95full,s92rem,s95full,s95rem,s92full;
@@ -27,6 +34,7 @@ public class StationDetailsActivity extends AppCompatActivity {
     String typeID,stationID,fuelType,remainder,capacity,noCars,noVans,noBikes,noTuks,noLorries,aTime;
     boolean fnish;
     int updateNo = 0;
+    double updatedRemainder =0;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -65,7 +73,7 @@ public class StationDetailsActivity extends AppCompatActivity {
         System.out.println("Intent Name: "+ name+" AND ID: "+id);
         stationName.setText(name);
 
-//        System.out.println(GlobalVariables.userFuelType.toUpperCase());
+        //filtering UI according to user fuel type
         if(GlobalVariables.userFuelType.equals("Petrol92") || GlobalVariables.userFuelType.equals("Petrol95")){
             diselSuper_row.setVisibility(View.GONE);
             diselNormal_row.setVisibility(View.GONE);
@@ -75,11 +83,12 @@ public class StationDetailsActivity extends AppCompatActivity {
         }
 
 
-
+        //calling station data service class to get fuel station details
         StationDataService dataService = new StationDataService(StationDetailsActivity.this);
         dataService.getFuelStationDetails(new StationDataService.FuelDataResponseListener() {
             @Override
             public void onResponse(FuelStationDetailsModel stationModel) {
+                //setting fuel capacities according to fuel type
                 if(stationModel.getType().equals("Petrol92")||stationModel.getType().equals("Petrol95")){
                     p92rem.setText(stationModel.getRemainder());
                     p92full.setText(stationModel.getCapacity());
@@ -87,6 +96,8 @@ public class StationDetailsActivity extends AppCompatActivity {
                     s92rem.setText(stationModel.getRemainder());
                     s92full.setText(stationModel.getCapacity());
                 }
+
+                //Setting retrieved data for variables
                 noCar.setText(stationModel.getNoOfCars());
                 noVan.setText(stationModel.getNoOfVans());
                 noBike.setText(stationModel.getNoOfMotocycles());
@@ -116,6 +127,7 @@ public class StationDetailsActivity extends AppCompatActivity {
             }
         });
 
+        //popup part
         btnDeparted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,11 +135,13 @@ public class StationDetailsActivity extends AppCompatActivity {
             }
         });
 
+        //Queue Arrival part
         btnArrived.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 StationDataService stationDataService = new StationDataService(StationDetailsActivity.this);
                 String vehicleType = GlobalVariables.userVehicle;
+                //Checking user vehicle type and adding to existing queue
                 switch (vehicleType){
                     case "Car":
                         updateNo = Integer.parseInt(noCars);
@@ -155,25 +169,36 @@ public class StationDetailsActivity extends AppCompatActivity {
                         noLorries = Integer.toString(updateNo);
                         break;
                 }
+                //calling update fuel queue service
                 stationDataService.updateFuelQueue(new StationDataService.UpdateFuelQueueResponseListener() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(StationDetailsActivity.this, "SuCCESS"+response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StationDetailsActivity.this, "Joined to Queue...", Toast.LENGTH_SHORT).show();
+                        //Refreshing the activity
+                        Intent i = new Intent(StationDetailsActivity.this,StationDetailsActivity.class);
+                        finish();
+                        overridePendingTransition(0,0);
+                        startActivity(i);
+                        overridePendingTransition(0,0);
+                        btnArrived.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onError(String message) {
                         Toast.makeText(StationDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
-                }, typeID, stationID, fuelType, remainder, capacity, noCars, noVans, noBikes, noTuks, noLorries, aTime, fnish);
+                }, typeID, noCars, noVans, noBikes, noTuks, noLorries,remainder);
             }
         });
     }
-
+    //Departure popup method
     private void exitPopUp(){
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.exit_popup_dialog);
         ImageView buttonClose = dialog.findViewById(R.id.close_icon);
+        EditText pumpedED = (EditText) dialog.findViewById(R.id.filled_Amount_editText);
+        Button exitWithPumped = dialog.findViewById(R.id.filled_Amount_Btn);
+        Button leaveBtn = dialog.findViewById(R.id.leaveQueueBtn);
         buttonClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,6 +206,111 @@ public class StationDetailsActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+        Editable filledAmount = pumpedED.getText();
+
+        exitWithPumped.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StationDataService stationDataService = new StationDataService(StationDetailsActivity.this);
+                //removing from the queue calculation
+                String vehicleType = GlobalVariables.userVehicle;
+                switch (vehicleType){
+                    case "Car":
+                        updateNo = Integer.parseInt(noCars);
+                        updateNo = updateNo - 1;
+                        noCars = Integer.toString(updateNo);
+                        break;
+                    case "Van":
+                        updateNo = Integer.parseInt(noVans);
+                        updateNo = updateNo - 1;
+                        noVans = Integer.toString(updateNo);
+                        break;
+                    case "Motorcycle":
+                        updateNo = Integer.parseInt(noBikes);
+                        updateNo = updateNo - 1;
+                        noBikes = Integer.toString(updateNo);
+                        break;
+                    case "Trishaw":
+                        updateNo = Integer.parseInt(noTuks);
+                        updateNo = updateNo - 1;
+                        noTuks = Integer.toString(updateNo);
+                        break;
+                    case "Lorry":
+                        updateNo = Integer.parseInt(noLorries);
+                        updateNo = updateNo - 1;
+                        noLorries = Integer.toString(updateNo);
+                        break;
+                }
+
+                //Calculating remainder fuel
+                double filled = Double.parseDouble(filledAmount.toString());
+                updatedRemainder = Double.parseDouble(remainder);
+                updatedRemainder = updatedRemainder - filled;
+                String upRemainder = Double.toString(updatedRemainder);
+
+                stationDataService.updateFuelQueue(new StationDataService.UpdateFuelQueueResponseListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Intent intent = new Intent(StationDetailsActivity.this,CustomerListView.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(StationDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                }, typeID, noCars, noVans, noBikes, noTuks, noLorries,upRemainder);
+            }
+        });
+        //leave without filling method
+        leaveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StationDataService stationDataService = new StationDataService(StationDetailsActivity.this);
+                String vehicleType = GlobalVariables.userVehicle;
+                switch (vehicleType){
+                    case "Car":
+                        updateNo = Integer.parseInt(noCars);
+                        updateNo = updateNo - 1;
+                        noCars = Integer.toString(updateNo);
+                        break;
+                    case "Van":
+                        updateNo = Integer.parseInt(noVans);
+                        updateNo = updateNo - 1;
+                        noVans = Integer.toString(updateNo);
+                        break;
+                    case "Motorcycle":
+                        updateNo = Integer.parseInt(noBikes);
+                        updateNo = updateNo - 1;
+                        noBikes = Integer.toString(updateNo);
+                        break;
+                    case "Trishaw":
+                        updateNo = Integer.parseInt(noTuks);
+                        updateNo = updateNo - 1;
+                        noTuks = Integer.toString(updateNo);
+                        break;
+                    case "Lorry":
+                        updateNo = Integer.parseInt(noLorries);
+                        updateNo = updateNo - 1;
+                        noLorries = Integer.toString(updateNo);
+                        break;
+                }
+
+                stationDataService.updateFuelQueue(new StationDataService.UpdateFuelQueueResponseListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Intent intent = new Intent(StationDetailsActivity.this,CustomerListView.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(StationDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                }, typeID, noCars, noVans, noBikes, noTuks, noLorries,remainder);
+            }
+        });
+
     }
 
 

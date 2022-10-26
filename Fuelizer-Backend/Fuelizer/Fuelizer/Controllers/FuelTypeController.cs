@@ -103,6 +103,43 @@ namespace Fuelizer.Controllers
             return fueltype;
         }
 
+        // PUT api/<FuelTypeController>/5
+        [HttpPut("toUpdateArrivals/{id}")]
+        public ActionResult PutToArrivals(string id, [FromBody] String arrivaltime)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            existingfueltype.ArrivalTime = arrivaltime;
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
+
+        // PUT api/<FuelTypeController>/6
+        [HttpPut("toUpdateQueue/{id}")]
+        public ActionResult PutToQueue(string id, String carCount, String vanCount, String bikeCount, String tukCount, String lorryCount, String remFuel)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            existingfueltype.NoOfCars = carCount;
+            existingfueltype.NoOfVans = vanCount;
+            existingfueltype.NoOfMotocycles = bikeCount;
+            existingfueltype.NoOfTrishaw = tukCount;
+            existingfueltype.NoOfLorries = lorryCount;
+            existingfueltype.Remainder = remFuel;
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
+
 
     }
 }

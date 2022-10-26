@@ -17,6 +17,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+IT18014396
+ displaying station list view and search part implemented here
+ */
 public class CustomerListView extends AppCompatActivity {
 
     ListView stationList;
@@ -78,18 +82,18 @@ public class CustomerListView extends AppCompatActivity {
                     }
         });
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                listAdapter.getFilter().filter(s);
-//                return false;
-//            }
-//        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                listAdapter.getFilter().filter(s);
+                return false;
+            }
+        });
     }
 
 //

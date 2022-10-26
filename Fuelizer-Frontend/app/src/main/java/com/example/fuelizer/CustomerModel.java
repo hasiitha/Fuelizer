@@ -1,5 +1,8 @@
 package com.example.fuelizer;
-
+/*
+IT18014396
+Model for customer details implemented in this class
+ */
 public class CustomerModel {
     private String id;
     private String userName;
