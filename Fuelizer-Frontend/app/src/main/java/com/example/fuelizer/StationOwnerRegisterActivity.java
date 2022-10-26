@@ -21,8 +21,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+/*
+*  this class is to register a station owner to the system
+* */
 
-// this class is to register a station owner to the system
+
 
 public class StationOwnerRegisterActivity extends AppCompatActivity {
 
