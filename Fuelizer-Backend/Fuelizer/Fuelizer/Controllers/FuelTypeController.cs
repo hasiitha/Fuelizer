@@ -103,5 +103,47 @@ namespace Fuelizer.Controllers
             return NoContent();
 
         }
+
+
+        // PUT api/<FuelTypeController>/5
+        [HttpPut("toaddamount/{id}")]
+        public ActionResult AddStorage(string id, string amount)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            String  remain_amounts = existingfueltype.Remainder;
+            int remain =  Int32.Parse(remain_amounts);
+            int add = Int32.Parse(amount);
+            int sum = add + remain;
+            String sumval = sum.ToString();
+            existingfueltype.Remainder = sumval;
+            existingfueltype.Finish = false;
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
+
+
+        // PUT api/<FuelTypeController>/5
+        [HttpPut("finishFuel/{id}")]
+        public ActionResult FinishFuel(string id)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            existingfueltype.Finish = true;
+            existingfueltype.Remainder = "0";
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
+
     }
 }
