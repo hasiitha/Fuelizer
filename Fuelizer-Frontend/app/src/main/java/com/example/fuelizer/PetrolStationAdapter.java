@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-
+/*Adapter to petril station Lists*/
 public class PetrolStationAdapter extends ArrayAdapter<StationModel> {
     //Reference: https://www.youtube.com/watch?v=RHqGiWluAzU&ab_channel=Foxandroid
     public PetrolStationAdapter(@NonNull Context context, ArrayList<StationModel> stationArrayList) {
