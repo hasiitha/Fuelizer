@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+/*Register petrol stations don here*/
 public class PetrolStationRegistration extends AppCompatActivity {
     private RequestQueue requestQueue; EditText station,locationN;
     Button btn_AddStation;

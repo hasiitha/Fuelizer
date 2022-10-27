@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/*Petral station List SCreen related methodologies done here*/
 public class MyPetrolStationList extends AppCompatActivity {
     ListView stationList;
     SearchView searchView;

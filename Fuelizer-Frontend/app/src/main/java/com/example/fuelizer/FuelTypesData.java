@@ -1,5 +1,5 @@
 package com.example.fuelizer;
-
+/*Methods for implementing the fuel types*/
 public class FuelTypesData {
     private String Id;
     private String StationId;
