@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(userType.equals("vehicleOwner")){
                                 //adding userName for global variable
                                 GlobalVariables.userName = uname;
-                                Intent intent = new Intent(LoginActivity.this, CustomerListView.class);
+                                Intent intent = new Intent(LoginActivity.this, OwnerMenue.class);
                                 intent.putExtra("username", uname);
                                 startActivity(intent);
                             }
