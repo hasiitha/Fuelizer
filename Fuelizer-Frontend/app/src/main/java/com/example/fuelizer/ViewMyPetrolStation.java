@@ -17,11 +17,12 @@ public class ViewMyPetrolStation extends AppCompatActivity {
     // viewing the petrol station details
     private Button selectStation;
     Button petrol_btn,petrol_btn_updatestock,btn_update95,btn_updateDiesel,
-            btn_updateSuperDiesel,btn_arrival95,btn_arrivalDiesel,btn_arrival_super_diesel;
+            btn_updateSuperDiesel,btn_arrival95,btn_arrivalDiesel,btn_arrival_super_diesel,btn_update_Status;
     String stationName;
     String stationId;
     String stationStatus;
     String stationLocation;
+    String statusO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,13 @@ public class ViewMyPetrolStation extends AppCompatActivity {
 
         TextView textViewToChange = (TextView) findViewById(R.id.st_name);
         textViewToChange.setText(stationName);
+
+
+
+
+        TextView textViewToChangeStatus = (TextView) findViewById(R.id.h_statusView);
+        textViewToChange.setText(GlobalVariables.stationStatus);
+
 
         MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(ViewMyPetrolStation.this);
         stationDataService.getstationFuelTypes(new MyPetrolStationDataService.VolleyResponseListenerDet() {
@@ -170,6 +178,8 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                 btn_arrival_super_diesel= findViewById(R.id.h_btn_nextarrival_superdiesel);
 
 
+                btn_update_Status = findViewById(R.id.h_updateStatus);
+
                 btn_update95.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -256,10 +266,69 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+
+                btn_update_Status.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewMyPetrolStation.this, Update_Next_Arrival_Stock.class);
+                        intent.putExtra("itemId", superDieselItemId);
+                        intent.putExtra("itemType","superdiesel");
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
+                        startActivity(intent);
+                    }
+                });
+
+                btn_update_Status.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                        MyPetrolStationDataService dataService = new MyPetrolStationDataService(ViewMyPetrolStation.this);
+                        dataService.updateStationStatus(new MyPetrolStationDataService.VolleyResponseListenerUpdateStatus() {
+                            @Override
+                            public void onResponse(String msg) {
+
+                                System.out.println("done updating");
+
+                                Intent intent = new Intent(ViewMyPetrolStation.this, MypetrolstationlistviewActivity.class);
+                                intent.putExtra("userId", GlobalVariables.userId);
+                                startActivity(intent);
+
+
+                            }
+
+
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        },stationId);
+
+//
+
+
+
+
+
+//                        Intent intent = new Intent(ViewMyPetrolStation.this, MypetrolstationlistviewActivity.class);
+//                        intent.putExtra("userId", GlobalVariables.userId);
+//                        startActivity(intent);
+                        //
+
+                        //
+
+                    }
+                });
+
             }
 
-
-
+            //h_updateStatus
+           // btn_update_Status
 
 
             @Override

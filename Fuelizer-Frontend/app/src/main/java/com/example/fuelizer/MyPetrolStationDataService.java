@@ -321,6 +321,43 @@ public class MyPetrolStationDataService {
         }
 
 
+    public interface VolleyResponseListenerUpdateStatus{
+        void onResponse(String msg);
+        void onError(String message);
+    }
 
 
-}
+    //update fuel types in fuel stations
+    public void updateStationStatus(VolleyResponseListenerUpdateStatus updateStationStatusListener,String stationId) {
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        //String url = URI+"FuelType/toUpdateQueue/"+typeID+"?carCount="+noCars+"&vanCount="+noVans+"&bikeCount="+noBikes+"&tukCount="+noTuks+"&lorryCount="+noLorries;
+        String url = "http://192.168.1.15:8081/api/FuelStation/changeStatus/"+stationId;
+
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        updateStationStatusListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                        updateStationStatusListener.onError("Error Updating Queue!!!");
+                    }
+                }
+        );
+
+        queue.add(putRequest);
+
+    }
+
+
+
+
+    }

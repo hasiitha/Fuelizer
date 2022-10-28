@@ -155,23 +155,22 @@ namespace Fuelizer.Controllers
         }
 
 
-        // PUT api/<FuelStationController>/5
-        [HttpPut("updateStatus/{id}")]
-        public ActionResult UpdateStatus(string id)
+        [HttpPut("changeStatus/{id}")]
+        public ActionResult changeStatus(string id)
         {
-            var existingstatusobj = fuelstationservice.Get(id);
-            if (existingstatusobj == null)
+            var existingfuelstation = fuelstationservice.Get(id);
+            if (existingfuelstation == null)
             {
-                return NotFound($"existingstatusobj with id = {id} not found");
+                return NotFound($"fueltype with id = {id} not found");
             }
-            existingstatusobj.OpenCloseStatus = !(existingstatusobj.OpenCloseStatus);
+          
 
-            fuelstationservice.Update(id, existingstatusobj);
+            FuelStation toUpdate = existingfuelstation;
+            toUpdate.OpenCloseStatus = !toUpdate.OpenCloseStatus;
+            fuelstationservice.Update(id, toUpdate);
             return NoContent();
 
-
         }
-
 
     }
 }
