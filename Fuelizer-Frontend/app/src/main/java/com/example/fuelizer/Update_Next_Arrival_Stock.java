@@ -54,6 +54,10 @@ public class Update_Next_Arrival_Stock extends AppCompatActivity {
             public void onClick(View v) {
                 String time = timeT.getText().toString();
                 String date= dateT.getText().toString();
+                if(time.equals("") || date.equals("")){
+
+                    Toast.makeText(Update_Next_Arrival_Stock.this, "Enter all the fields !", Toast.LENGTH_SHORT).show();
+                }else {
                 String toUpdate = date +" "+time;
                 System.out.println(toUpdate);
                 MyPetrolStationDataService dataService = new MyPetrolStationDataService(Update_Next_Arrival_Stock.this);
@@ -61,7 +65,9 @@ public class Update_Next_Arrival_Stock extends AppCompatActivity {
                     @Override
                     public void onResponse(String msg)
                     {
+
                         System.out.println("done updating");
+                        Toast.makeText(Update_Next_Arrival_Stock.this, "Updated the Arrival times of new stocks", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Update_Next_Arrival_Stock.this, ViewMyPetrolStation.class);
                         intent.putExtra("name",stationName);
                         intent.putExtra("ID",stationId);
@@ -79,6 +85,7 @@ public class Update_Next_Arrival_Stock extends AppCompatActivity {
                 },fuelTypeItemId,toUpdate);
 
 //
+            }
             }
         });
 

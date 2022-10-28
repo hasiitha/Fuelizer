@@ -288,7 +288,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                             public void onResponse(String msg) {
 
                                 System.out.println("done updating");
-
+                                Toast.makeText(ViewMyPetrolStation.this, "Updated the Status of the Petrol Station", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ViewMyPetrolStation.this, MypetrolstationlistviewActivity.class);
                                 intent.putExtra("userId", GlobalVariables.userId);
                                 startActivity(intent);

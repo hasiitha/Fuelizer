@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 /*Methods for update station storage*/
@@ -56,10 +57,6 @@ public class UpdateStationStorage extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-
-                //                intent.putExtra("itemId", petrolItemId);
-//                intent.putExtra("itemType","petrol");
-//                startActivity(intent);
                 @Override
                 public void onError(String message) {
 
@@ -74,6 +71,10 @@ public class UpdateStationStorage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String amount = capacity_Update.getText().toString();
+                if(amount.equals("")){
+
+                    Toast.makeText(UpdateStationStorage.this, "Enter all the fields !", Toast.LENGTH_SHORT).show();
+                }else {
                 MyPetrolStationDataService dataService = new MyPetrolStationDataService(UpdateStationStorage.this);
                 dataService.updateCapacity(new MyPetrolStationDataService.VolleyResponseListenerUpdateCapacity() {
                     @Override
@@ -81,6 +82,7 @@ public class UpdateStationStorage extends AppCompatActivity {
                         System.out.println("done updating");
 
                         System.out.println("done updating");
+                        Toast.makeText(UpdateStationStorage.this, "Updated the Stocks", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(UpdateStationStorage.this, ViewMyPetrolStation.class);
                         intent.putExtra("name",stationName);
                         intent.putExtra("ID",stationId);
@@ -98,6 +100,7 @@ public class UpdateStationStorage extends AppCompatActivity {
 
 
             }
+            }
         });
 
     //Update Finish Status
@@ -109,7 +112,7 @@ public class UpdateStationStorage extends AppCompatActivity {
                 dataService.finishStocks(new MyPetrolStationDataService.VolleyResponseListenerFinishStocks() {
                     @Override
                     public void onResponse(String msg) {
-
+                        Toast.makeText(UpdateStationStorage.this, "Updated the Stock Status", Toast.LENGTH_SHORT).show();
                         System.out.println("done updating");
                         Intent intent = new Intent(UpdateStationStorage.this, ViewMyPetrolStation.class);
                         intent.putExtra("name",stationName);
