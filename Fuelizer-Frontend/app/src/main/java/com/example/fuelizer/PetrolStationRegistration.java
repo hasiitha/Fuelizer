@@ -60,18 +60,16 @@ public class PetrolStationRegistration extends AppCompatActivity {
 
                 }
 
-                //nav
-//
             }
         });
     }
 
 
-    //db
+    // url to post the Petrol Station data to DB
     private void postDataToDB(String stationName, String location,String status,String userId){
-        // url to post the user data
+
         String url = "http://192.168.1.15:8081/api/FuelStation";
-//        vehicleOwnerPB.setVisibility(View.VISIBLE);
+
 
         HashMap<String, String> params = new HashMap<String, String>();
 
@@ -86,9 +84,9 @@ public class PetrolStationRegistration extends AppCompatActivity {
                         try {
                             System.out.println(response.toString()+"hvgcfxze");
                             VolleyLog.v("Response:%n %s", response.toString(4));
-
                             Intent intent = new Intent(PetrolStationRegistration.this, OwnerMenue.class);
                             intent.putExtra("username",userName);
+                            
                             startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();

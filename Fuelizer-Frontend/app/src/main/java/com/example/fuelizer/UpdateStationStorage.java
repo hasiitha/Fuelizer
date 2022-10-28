@@ -37,38 +37,39 @@ public class UpdateStationStorage extends AppCompatActivity {
         update_Capacity = (Button) findViewById(R.id.h_btn_update_capacity_storage);
         finish_Stock= (Button) findViewById(R.id.h_btn_finishstock_storage);
 
+        //Update stocks
         update_Stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String amount = stock_Update.getText().toString();
                 MyPetrolStationDataService dataService = new MyPetrolStationDataService(UpdateStationStorage.this);
                 dataService.updateStocks(new MyPetrolStationDataService.VolleyResponseListenerUpdateStocks() {
-                    @Override
-                    public void onResponse(String msg) {
+                @Override
+                public void onResponse(String msg) {
 
-                        System.out.println("done updating");
-                        Intent intent = new Intent(UpdateStationStorage.this, ViewMyPetrolStation.class);
-                        intent.putExtra("name",stationName);
-                        intent.putExtra("ID",stationId);
-                        intent.putExtra("status",stationStatus);
-                        intent.putExtra("location",stationLocation);
-                        startActivity(intent);
-                    }
+                    System.out.println("done updating");
+                    Intent intent = new Intent(UpdateStationStorage.this, ViewMyPetrolStation.class);
+                    intent.putExtra("name",stationName);
+                    intent.putExtra("ID",stationId);
+                    intent.putExtra("status",stationStatus);
+                    intent.putExtra("location",stationLocation);
+                    startActivity(intent);
+                }
 
 
-                    //                intent.putExtra("itemId", petrolItemId);
+                //                intent.putExtra("itemId", petrolItemId);
 //                intent.putExtra("itemType","petrol");
 //                startActivity(intent);
-                    @Override
-                    public void onError(String message) {
+                @Override
+                public void onError(String message) {
 
-                    }
-                },fuelTypeItemId,amount);
+                }
+            },fuelTypeItemId,amount);
 
-//
-            }
+        }
         });
 
+        //Update Capacity
         update_Capacity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,11 +96,11 @@ public class UpdateStationStorage extends AppCompatActivity {
                     }
                 },fuelTypeItemId,amount);
 
-//
+
             }
         });
 
-
+    //Update Finish Status
         finish_Stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

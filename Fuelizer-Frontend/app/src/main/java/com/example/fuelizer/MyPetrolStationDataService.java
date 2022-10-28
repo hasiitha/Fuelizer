@@ -20,37 +20,32 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-/*A class to do the http request using volley for fuel stations*/
+/*A class to do the http request using volley for fuel stations related rest functionalities*/
 //Reference: https://www.youtube.com/watch?v=xPi-z3nOcn8&t=6488s&ab_channel=freeCodeCamp.org
 public class MyPetrolStationDataService {
-
-
     Context context;
     String ownerId ;
-
-
     public MyPetrolStationDataService(Context context) {
         this.context = context;
     }
 
 
 
+    //Interface and method for GetAllStations for a specific user
     public interface VolleyResponseListener{
         void onResponse(ArrayList<StationModel> stationModel);
         void onError(String message);
     }
-//gett all request
     public void getAllStations(MyPetrolStationDataService.VolleyResponseListener volleyResponseListener,String ownerId){
         System.out.println(ownerId+"Owneridesa");
         ArrayList<StationModel> stationModelList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "http://192.168.1.15:8081/api/FuelStation/getmyfuelstations/"+ownerId;
-        //http://192.168.1.15:8081/api/FuelStation
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    System.out.println("Hi: "+response);
+
                     for (int i = 0; i < response.length(); i++) {
                         StationModel stationModel = new StationModel();
                         JSONObject first_data = (JSONObject) response.get(i);
@@ -81,7 +76,7 @@ public class MyPetrolStationDataService {
     }
 
 
-    //getting petrolstationdetails
+    //Interface and method for get Details of a specific Fuel Station
     public interface VolleyResponseListenerDet{
         void onResponse(HashMap<String,FuelTypesData> fuelType);
         void onError(String message);
@@ -148,18 +143,16 @@ public class MyPetrolStationDataService {
     }
 
 
+    //Interface and method for update Arriving date and times
     public interface VolleyResponseListenerUpdateArrivalDate{
         void onResponse(String msg);
         void onError(String message);
     }
 
-
-//update fuel types in fuel stations
     public void updateFuelArrivals(VolleyResponseListenerUpdateArrivalDate updateFuelArrivalsResponseListener,String typeID,String date){
 
      RequestQueue queue = Volley.newRequestQueue(context);
 
-     //String url = URI+"FuelType/toUpdateQueue/"+typeID+"?carCount="+noCars+"&vanCount="+noVans+"&bikeCount="+noBikes+"&tukCount="+noTuks+"&lorryCount="+noLorries;
         String url = "http://192.168.1.15:8081/api/FuelType/toUpdateArrivals/"+typeID+"?arrivaltime="+date;
 
 
@@ -192,7 +185,7 @@ public class MyPetrolStationDataService {
 
 
 
-
+//Interface and method for update Stocks
     public interface VolleyResponseListenerUpdateStocks{
         void onResponse(String msg);
         void onError(String message);
@@ -236,8 +229,7 @@ public class MyPetrolStationDataService {
     }
 
 
-
-
+//Interface and method for Update capacity
     public interface VolleyResponseListenerUpdateCapacity{
         void onResponse(String msg);
         void onError(String message);
@@ -282,7 +274,7 @@ public class MyPetrolStationDataService {
 
 
 
-    //finish fuel stocks at once
+    //Interface and method for Update Finish status
     public interface VolleyResponseListenerFinishStocks{
         void onResponse(String msg);
         void onError(String message);
@@ -321,18 +313,17 @@ public class MyPetrolStationDataService {
         }
 
 
+        //Interface and Method for Update Petrol Station Open Close Status
     public interface VolleyResponseListenerUpdateStatus{
         void onResponse(String msg);
         void onError(String message);
     }
 
-
-    //update fuel types in fuel stations
     public void updateStationStatus(VolleyResponseListenerUpdateStatus updateStationStatusListener,String stationId) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        //String url = URI+"FuelType/toUpdateQueue/"+typeID+"?carCount="+noCars+"&vanCount="+noVans+"&bikeCount="+noBikes+"&tukCount="+noTuks+"&lorryCount="+noLorries;
+
         String url = "http://192.168.1.15:8081/api/FuelStation/changeStatus/"+stationId;
 
 
