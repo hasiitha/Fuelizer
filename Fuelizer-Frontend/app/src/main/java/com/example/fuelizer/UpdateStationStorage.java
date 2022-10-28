@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.Locale;
-
+/*Methods for update station storage*/
 public class UpdateStationStorage extends AppCompatActivity {
 
     @Override

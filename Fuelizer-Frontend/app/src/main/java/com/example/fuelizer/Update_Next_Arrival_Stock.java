@@ -15,7 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-
+/*Method for update arrival times of stocks*/
 public class Update_Next_Arrival_Stock extends AppCompatActivity {
 
     private EditText dateT,timeT;
