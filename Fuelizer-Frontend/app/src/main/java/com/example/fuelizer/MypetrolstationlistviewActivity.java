@@ -15,11 +15,10 @@ import java.util.ArrayList;
 /*Petrol station List
 * */
 public class MypetrolstationlistviewActivity extends AppCompatActivity {
-
     ListView stationList;
     SearchView searchView;
     PetrolStationAdapter listAdapter;
-
+    String   ownerId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +27,12 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
         stationList = (ListView) findViewById(R.id.stationListView);
         searchView = findViewById(R.id.searchbar_input);
 
-//        showListBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        ownerId  = getIntent().getStringExtra("userId");
 
         MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(MypetrolstationlistviewActivity.this);
         stationDataService.getAllStations(new MyPetrolStationDataService.VolleyResponseListener() {
             @Override
             public void onResponse(ArrayList<StationModel> stationModel) {
-//                        ArrayAdapter arrayAdapter = new ArrayAdapter(CustomerListView.this, android.R.layout.simple_list_item_1,stationModel);
                 listAdapter = new PetrolStationAdapter(getApplicationContext(),stationModel);
                 stationList.setAdapter(listAdapter);
                 stationList.setClickable(true);
@@ -60,11 +56,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
             public void onError(String message) {
                 Toast.makeText(MypetrolstationlistviewActivity.this,message , Toast.LENGTH_LONG).show();
             }
-        });
-//            }
-//
-//        });
-
+        },ownerId);
 
     }
 }
