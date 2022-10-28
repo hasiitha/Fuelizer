@@ -40,7 +40,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
 
 
         TextView textViewToChangeStatus = (TextView) findViewById(R.id.h_statusView);
-        textViewToChange.setText(GlobalVariables.stationStatus);
+        textViewToChangeStatus.setText(GlobalVariables.stationStatus);
 
 
         MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(ViewMyPetrolStation.this);
@@ -50,26 +50,26 @@ public class ViewMyPetrolStation extends AppCompatActivity {
 
                 //Fetching details of the petrol station
                 System.out.println((fuelType.get("diesel").getRemainder())+"remainder");
-                String petrol92remain = (fuelType.get("petrol").getRemainder())+"L/";
+                String petrol92remain = (fuelType.get("petrol").getRemainder());
                 String petrol92capacity = (fuelType.get("petrol").getCapacity());
                 String petrol92arrivalDateTime = (fuelType.get("petrol").getArrivalTime());
 
 
 
-                String petrol95remain = (fuelType.get("petrol95").getRemainder())+"L/";
+                String petrol95remain = (fuelType.get("petrol95").getRemainder());
                 String petrol95capacity = (fuelType.get("petrol95").getCapacity());
                 String petrol95arrivalDateTime = (fuelType.get("petrol95").getArrivalTime());
 
 
 
 
-                String dieselRemain = (fuelType.get("diesel").getRemainder())+"L/";;
+                String dieselRemain = (fuelType.get("diesel").getRemainder());;
                 String dieselCapacity = (fuelType.get("diesel").getCapacity());
                 String dieselArrivalDateTime = (fuelType.get("diesel").getArrivalTime());
 
 
 
-                String superDieselRemain = ("      "+fuelType.get("superdiesel").getRemainder())+"L/";;
+                String superDieselRemain = (fuelType.get("superdiesel").getRemainder());;
                 String superDieselCapacity = (fuelType.get("superdiesel").getCapacity());
                 String superDieselArrivalDateTime = (fuelType.get("superdiesel").getArrivalTime());
 
@@ -78,16 +78,16 @@ public class ViewMyPetrolStation extends AppCompatActivity {
 //Setting Views in Station List
 
                 TextView remainderPetrol92 = (TextView) findViewById(R.id.h_petrol_remain);
-                remainderPetrol92.setText(petrol92remain);
+                remainderPetrol92.setText(petrol92remain+"L/");
 
                 TextView remainderPetrol95 = (TextView) findViewById(R.id.h_petrol95_remain);
-                remainderPetrol95.setText(petrol95remain);
+                remainderPetrol95.setText(petrol95remain+"L/");
 
                 TextView remainderDiesel = (TextView) findViewById(R.id.h_diesel_remain);
-                remainderDiesel.setText(dieselRemain);
+                remainderDiesel.setText(dieselRemain+"L/");
 
                 TextView remainderSuperDiesel = (TextView) findViewById(R.id.h_superdiesel_remain);
-                remainderSuperDiesel .setText(superDieselRemain);
+                remainderSuperDiesel .setText("     "+ superDieselRemain+"L/");
 
                 TextView capacityPetrol92 = (TextView) findViewById(R.id.h_petrol_capacity);
                 capacityPetrol92.setText(petrol92capacity);
@@ -131,6 +131,9 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         intent.putExtra("itemId", petrolItemId);
                         intent.putExtra("itemType","petrol");
 
+                        intent.putExtra("capacity",petrol92capacity);
+                        intent.putExtra("remain",petrol92remain);
+
                         intent.putExtra("name",stationName);
                         intent.putExtra("ID",stationId);
                         intent.putExtra("status",stationStatus);
@@ -153,6 +156,10 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         intent.putExtra("ID",stationId);
                         intent.putExtra("status",stationStatus);
                         intent.putExtra("location",stationLocation);
+
+                        intent.putExtra("capacity",petrol92capacity);
+                        intent.putExtra("remain",petrol92remain);
+
                         startActivity(intent);
 
                     }
@@ -182,6 +189,9 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         intent.putExtra("itemId", petrol95ItemId);
                         intent.putExtra("itemType","petrol95");
 
+                        intent.putExtra("capacity",petrol95capacity);
+                        intent.putExtra("remain",petrol95remain);
+
                         intent.putExtra("name",stationName);
                         intent.putExtra("ID",stationId);
                         intent.putExtra("status",stationStatus);
@@ -201,6 +211,10 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         intent.putExtra("ID",stationId);
                         intent.putExtra("status",stationStatus);
                         intent.putExtra("location",stationLocation);
+
+                        intent.putExtra("capacity",dieselCapacity);
+                        intent.putExtra("remain",dieselRemain);
+
                         startActivity(intent);
                     }
                 });
@@ -215,6 +229,9 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         intent.putExtra("ID",stationId);
                         intent.putExtra("status",stationStatus);
                         intent.putExtra("location",stationLocation);
+
+                        intent.putExtra("capacity",superDieselCapacity);
+                        intent.putExtra("remain",superDieselRemain);
                         startActivity(intent);
                     }
                 });
@@ -229,6 +246,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         intent.putExtra("ID",stationId);
                         intent.putExtra("status",stationStatus);
                         intent.putExtra("location",stationLocation);
+
                         startActivity(intent);
                     }
                 });
@@ -288,7 +306,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                             public void onResponse(String msg) {
 
                                 System.out.println("done updating");
-
+                                Toast.makeText(ViewMyPetrolStation.this, "Updated the Status of the Petrol Station", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(ViewMyPetrolStation.this, MypetrolstationlistviewActivity.class);
                                 intent.putExtra("userId", GlobalVariables.userId);
                                 startActivity(intent);

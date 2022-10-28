@@ -82,11 +82,11 @@ public class PetrolStationRegistration extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            System.out.println(response.toString()+"hvgcfxze");
                             VolleyLog.v("Response:%n %s", response.toString(4));
+                            Toast.makeText(PetrolStationRegistration.this, "Petrol Station Added to Database !", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PetrolStationRegistration.this, OwnerMenue.class);
                             intent.putExtra("username",userName);
-                            
+
                             startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();

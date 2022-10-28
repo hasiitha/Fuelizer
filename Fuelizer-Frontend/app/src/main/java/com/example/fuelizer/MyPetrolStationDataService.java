@@ -332,6 +332,11 @@ public class MyPetrolStationDataService {
                     @Override
                     public void onResponse(String response) {
                         updateStationStatusListener.onResponse(response);
+                       if(GlobalVariables.stationStatus == "OPEN"){
+                           GlobalVariables.stationStatus = "CLOSE";
+                       } else{
+                           GlobalVariables.stationStatus = "OPEN";
+                       }
                     }
                 },
                 new Response.ErrorListener() {
