@@ -19,6 +19,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
     SearchView searchView;
     PetrolStationAdapter listAdapter;
     String   ownerId;
+    String status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +28,11 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
         stationList = (ListView) findViewById(R.id.stationListView);
         searchView = findViewById(R.id.searchbar_input);
 
-        ownerId  = getIntent().getStringExtra("userId");
 
+            ownerId  = getIntent().getStringExtra("userId");
+
+
+        GlobalVariables.userId = ownerId;
         MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(MypetrolstationlistviewActivity.this);
         stationDataService.getAllStations(new MyPetrolStationDataService.VolleyResponseListener() {
             @Override
@@ -41,6 +45,11 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         System.out.println("Clicked One:" + i);
+                        if(stationModel.get(i).isStatus()){
+                            status ="true";
+                        }else{
+                            status ="false";
+                        }
                         Intent intent = new Intent(getApplicationContext(),ViewMyPetrolStation.class);
                         intent.putExtra("name", stationModel.get(i).getStation_name());
                         intent.putExtra("ID",stationModel.get(i).getId());
@@ -56,7 +65,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
             public void onError(String message) {
                 Toast.makeText(MypetrolstationlistviewActivity.this,message , Toast.LENGTH_LONG).show();
             }
-        },ownerId);
+        },GlobalVariables.userId);
 
     }
 }

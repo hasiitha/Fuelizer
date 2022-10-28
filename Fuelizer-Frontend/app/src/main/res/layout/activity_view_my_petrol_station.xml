@@ -76,7 +76,7 @@
 
             <Button
                 android:id="@+id/h_update_petrol92_vol"
-                android:layout_width="wrap_content"
+                android:layout_width="157dp"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
 
@@ -120,7 +120,7 @@
 
             <Button
                 android:id="@+id/h_update_petrol95_vol"
-                android:layout_width="wrap_content"
+                android:layout_width="116dp"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
 
@@ -164,7 +164,7 @@
 
             <Button
                 android:id="@+id/h_update_diesel_vol"
-                android:layout_width="wrap_content"
+                android:layout_width="115dp"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
 
@@ -208,7 +208,7 @@
 
             <Button
                 android:id="@+id/h_update_superdiesel_vol"
-                android:layout_width="wrap_content"
+                android:layout_width="142dp"
                 android:layout_height="wrap_content"
                 android:text="UPDATE" />
 
@@ -349,12 +349,13 @@
         android:text="update status"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/h_statusView"
         android:layout_width="203dp"
         android:layout_height="54dp"
         android:layout_marginTop="13dp"
