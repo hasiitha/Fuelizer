@@ -19,7 +19,7 @@ import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-/**/
+/* Updating Next Arrival date and time*/
 public class Update_Next_Arrival_Stock extends AppCompatActivity {
 
     private EditText dateT,timeT;

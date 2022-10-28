@@ -47,36 +47,35 @@ public class ViewMyPetrolStation extends AppCompatActivity {
         stationDataService.getstationFuelTypes(new MyPetrolStationDataService.VolleyResponseListenerDet() {
             @Override
             public void onResponse(HashMap<String,FuelTypesData> fuelType) {
-//                        ArrayAdapter arrayAdapter = new ArrayAdapter(CustomerListView.this, android.R.layout.simple_list_item_1,stationModel);
 
+                //Fetching details of the petrol station
                 System.out.println((fuelType.get("diesel").getRemainder())+"remainder");
                 String petrol92remain = (fuelType.get("petrol").getRemainder())+"L/";
                 String petrol92capacity = (fuelType.get("petrol").getCapacity());
                 String petrol92arrivalDateTime = (fuelType.get("petrol").getArrivalTime());
-                //String petrol92arrivalTime = (fuelType.get("petrol").getArriva());
+
 
 
                 String petrol95remain = (fuelType.get("petrol95").getRemainder())+"L/";
                 String petrol95capacity = (fuelType.get("petrol95").getCapacity());
                 String petrol95arrivalDateTime = (fuelType.get("petrol95").getArrivalTime());
-                //String petrol95arrivalTime = (fuelType.get("petrol95").getRemainder());
+
 
 
 
                 String dieselRemain = (fuelType.get("diesel").getRemainder())+"L/";;
                 String dieselCapacity = (fuelType.get("diesel").getCapacity());
                 String dieselArrivalDateTime = (fuelType.get("diesel").getArrivalTime());
-                //String dieselArrivalTime = (fuelType.get("diesel").getRemainder());
+
 
 
                 String superDieselRemain = ("      "+fuelType.get("superdiesel").getRemainder())+"L/";;
                 String superDieselCapacity = (fuelType.get("superdiesel").getCapacity());
                 String superDieselArrivalDateTime = (fuelType.get("superdiesel").getArrivalTime());
-                //String superDieselArrivalTime = (fuelType.get("superdiesel").getRemainder());
 
 
 
-
+//Setting Views in Station List
 
                 TextView remainderPetrol92 = (TextView) findViewById(R.id.h_petrol_remain);
                 remainderPetrol92.setText(petrol92remain);
@@ -105,31 +104,26 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                 TextView arrivalDatePetrol92 = (TextView) findViewById(R.id.h_petrol_arrive_i);
                 arrivalDatePetrol92.setText(petrol92arrivalDateTime);
 
-//                TextView arrivalTimePetrol92 = (TextView) findViewById(R.id.petrolval);
-//                arrivalTimePetrol92.setText(petrol92remain);
 
                 TextView arrivalDatePetrol95 = (TextView) findViewById(R.id.h_pertrol95_arrive_i);
                 arrivalDatePetrol95.setText(petrol95arrivalDateTime);
 
-//                TextView arrivalTimePetrol95 = (TextView) findViewById(R.id.petrolval);
-//                arrivalTimePetrol95.setText(petrol92remain);
+
 
                 TextView arrivalDateDiesel = (TextView) findViewById(R.id.h_diesel_arrive_i);
                 arrivalDateDiesel.setText(dieselArrivalDateTime);
 
-//                TextView arrivalTimeDiesel = (TextView) findViewById(R.id.petrolval);
-//                arrivalTimeDiesel.setText(petrol92remain);
+
 
                 TextView arrivalDateSuperDiesel = (TextView) findViewById(R.id.h_superdiesel_arrive_i);
                 arrivalDateSuperDiesel.setText(superDieselArrivalDateTime);
 
-//                TextView arrivalTimeSuperDiesel = (TextView) findViewById(R.id.petrolval);
-//                arrivalTimeSuperDiesel.setText(petrol92remain);
 
-//
                 petrol_btn = findViewById(R.id.h_btn_nextarrival_patrol);
 
                 String petrolItemId = (fuelType.get("petrol").getId());
+
+                //Update Petrol
                 petrol_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -145,6 +139,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                     }
                 });
 
+                //Update Stocks
                 petrol_btn_updatestock = findViewById(R.id.h_update_petrol92_vol);
 
                 petrol_btn_updatestock.setOnClickListener(new View.OnClickListener() {
@@ -309,27 +304,10 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                             }
                         },stationId);
 
-//
-
-
-
-
-
-//                        Intent intent = new Intent(ViewMyPetrolStation.this, MypetrolstationlistviewActivity.class);
-//                        intent.putExtra("userId", GlobalVariables.userId);
-//                        startActivity(intent);
-                        //
-
-                        //
-
                     }
                 });
 
             }
-
-            //h_updateStatus
-           // btn_update_Status
-
 
             @Override
             public void onError(String message) {

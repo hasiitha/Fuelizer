@@ -1,5 +1,6 @@
 package com.example.fuelizer;
-/*Methods for implementing the fuel types*/
+/*Model class for FuelTypesData to make use of custom data type of FuelTypesData objects in the DB Update Services
+* consists with attributes,getters and setters */
 public class FuelTypesData {
     private String Id;
     private String StationId;

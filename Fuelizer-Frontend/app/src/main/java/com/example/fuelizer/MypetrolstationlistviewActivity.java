@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/*Petrol station List
+/*Petrol station List Related Class
 * */
 public class MypetrolstationlistviewActivity extends AppCompatActivity {
     ListView stationList;
@@ -28,10 +28,11 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
         stationList = (ListView) findViewById(R.id.stationListView);
         searchView = findViewById(R.id.searchbar_input);
 
+        //getting data from Intent
+         ownerId  = getIntent().getStringExtra("userId");
 
-            ownerId  = getIntent().getStringExtra("userId");
 
-
+         //Fetching data of My Petrol Station
         GlobalVariables.userId = ownerId;
         MyPetrolStationDataService stationDataService = new MyPetrolStationDataService(MypetrolstationlistviewActivity.this);
         stationDataService.getAllStations(new MyPetrolStationDataService.VolleyResponseListener() {
@@ -42,6 +43,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
                 stationList.setClickable(true);
                 stationList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
+                    //Select my Petrol Station
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         System.out.println("Clicked One:" + i);
