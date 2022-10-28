@@ -58,7 +58,7 @@ public class Update_Next_Arrival_Stock extends AppCompatActivity {
 
                     Toast.makeText(Update_Next_Arrival_Stock.this, "Enter all the fields !", Toast.LENGTH_SHORT).show();
                 }else {
-                String toUpdate = date +" "+time;
+                String toUpdate = date +"  "+time;
                 System.out.println(toUpdate);
                 MyPetrolStationDataService dataService = new MyPetrolStationDataService(Update_Next_Arrival_Stock.this);
                 dataService.updateFuelArrivals(new MyPetrolStationDataService.VolleyResponseListenerUpdateArrivalDate() {
@@ -84,7 +84,7 @@ public class Update_Next_Arrival_Stock extends AppCompatActivity {
                     }
                 },fuelTypeItemId,toUpdate);
 
-//
+
             }
             }
         });

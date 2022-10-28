@@ -16,6 +16,7 @@ public class UpdateStationStorage extends AppCompatActivity {
     String stationName,stationId,stationStatus,stationLocation;
     EditText stock_Update,capacity_Update;
     Button update_Stock,update_Capacity,finish_Stock;
+    int limit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,11 @@ public class UpdateStationStorage extends AppCompatActivity {
         stationStatus = getIntent().getStringExtra("status");
         stationLocation = getIntent().getStringExtra("location");
 
+        String remain = stationStatus = getIntent().getStringExtra("remain");
+        String max = stationStatus = getIntent().getStringExtra("capacity");
+
+        limit = Integer.parseInt(max) - Integer.parseInt(remain) ;
+
         stock_Update = (EditText) findViewById(R.id.h_editnewAmountStorage);
         capacity_Update = (EditText) findViewById(R.id.h_edittextnewCapacitystorage);
 
@@ -42,7 +48,14 @@ public class UpdateStationStorage extends AppCompatActivity {
         update_Stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String amount = stock_Update.getText().toString();
+                int amV = Integer.parseInt(amount);
+                if(amount.equals("")){
+                    Toast.makeText(UpdateStationStorage.this, "Enter all the fields !", Toast.LENGTH_SHORT).show();
+                }else if(amV>limit)  {
+                    Toast.makeText(UpdateStationStorage.this, "Your Amount Cant Exceed Capacity", Toast.LENGTH_SHORT).show();
+                }else{
                 MyPetrolStationDataService dataService = new MyPetrolStationDataService(UpdateStationStorage.this);
                 dataService.updateStocks(new MyPetrolStationDataService.VolleyResponseListenerUpdateStocks() {
                 @Override
@@ -64,6 +77,7 @@ public class UpdateStationStorage extends AppCompatActivity {
             },fuelTypeItemId,amount);
 
         }
+            }
         });
 
         //Update Capacity
