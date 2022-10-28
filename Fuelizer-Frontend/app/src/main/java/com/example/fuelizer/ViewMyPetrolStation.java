@@ -87,7 +87,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                 remainderDiesel.setText(dieselRemain+"L/");
 
                 TextView remainderSuperDiesel = (TextView) findViewById(R.id.h_superdiesel_remain);
-                remainderSuperDiesel .setText("    "+ superDieselRemain+"L/");
+                remainderSuperDiesel .setText("     "+ superDieselRemain+"L/");
 
                 TextView capacityPetrol92 = (TextView) findViewById(R.id.h_petrol_capacity);
                 capacityPetrol92.setText(petrol92capacity);
