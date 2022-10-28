@@ -14,7 +14,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btn_v_owner, btn_s_owner;
+    private Button btn_v_owner, btn_s_owner ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         btn_v_owner=findViewById(R.id.btn_vehical_owner);
         btn_s_owner = findViewById(R.id.btn_station_owner);
-
         // button click for vehicle owner
         btn_v_owner.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,7 +16,8 @@ import java.util.HashMap;
 public class ViewMyPetrolStation extends AppCompatActivity {
     // viewing the petrol station details
     private Button selectStation;
-    Button petrol_btn,petrol_btn_updatestock;
+    Button petrol_btn,petrol_btn_updatestock,btn_update95,btn_updateDiesel,
+            btn_updateSuperDiesel,btn_arrival95,btn_arrivalDiesel,btn_arrival_super_diesel;
     String stationName;
     String stationId;
     String stationStatus;
@@ -25,8 +26,6 @@ public class ViewMyPetrolStation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_my_petrol_station);
-
-
 
         stationName = getIntent().getStringExtra("name");
         stationId = getIntent().getStringExtra("ID");
@@ -42,6 +41,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
             public void onResponse(HashMap<String,FuelTypesData> fuelType) {
 //                        ArrayAdapter arrayAdapter = new ArrayAdapter(CustomerListView.this, android.R.layout.simple_list_item_1,stationModel);
 
+                System.out.println((fuelType.get("diesel").getRemainder())+"remainder");
                 String petrol92remain = (fuelType.get("petrol").getRemainder())+"L/";
                 String petrol92capacity = (fuelType.get("petrol").getCapacity());
                 String petrol92arrivalDateTime = (fuelType.get("petrol").getArrivalTime());
@@ -128,34 +128,146 @@ public class ViewMyPetrolStation extends AppCompatActivity {
                         Intent intent = new Intent(ViewMyPetrolStation.this, Update_Next_Arrival_Stock.class);
                         intent.putExtra("itemId", petrolItemId);
                         intent.putExtra("itemType","petrol");
+
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
                         startActivity(intent);
                     }
                 });
-                String petrol95ItemId = (fuelType.get("petrol95").getId());
+
                 petrol_btn_updatestock = findViewById(R.id.h_update_petrol92_vol);
 
                 petrol_btn_updatestock.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                       System.out.println("clicked95");
+                        Intent intent = new Intent(ViewMyPetrolStation.this, UpdateStationStorage.class);
+                        intent.putExtra("itemId", petrolItemId);
+                        intent.putExtra("itemType","petrol");
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
+                        startActivity(intent);
+
+                    }
+                });
+
+//updating stocks and capacities
+                String petrol95ItemId = (fuelType.get("petrol95").getId());
+                String dieselItemId = (fuelType.get("diesel").getId());
+                String superDieselItemId = (fuelType.get("superdiesel").getId());
+
+
+
+                btn_update95 = findViewById(R.id.h_update_petrol95_vol);
+                btn_updateDiesel = findViewById(R.id.h_update_diesel_vol);
+                btn_updateSuperDiesel= findViewById(R.id.h_update_superdiesel_vol);
+                btn_arrival95= findViewById(R.id.h_btn_nextarrival_petrol95);
+                btn_arrivalDiesel= findViewById(R.id.h_btn_nextarrival_diesel);
+                btn_arrival_super_diesel= findViewById(R.id.h_btn_nextarrival_superdiesel);
+
+
+                btn_update95.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
                         Intent intent = new Intent(ViewMyPetrolStation.this, UpdateStationStorage.class);
                         intent.putExtra("itemId", petrol95ItemId);
-                        intent.putExtra("itemType","petrol");
+                        intent.putExtra("itemType","petrol95");
+
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
                         startActivity(intent);
                     }
                 });
 
 
-                ;
+                btn_updateDiesel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewMyPetrolStation.this, UpdateStationStorage.class);
+                        intent.putExtra("itemId", dieselItemId);
+                        intent.putExtra("itemType","diesel");
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
+                        startActivity(intent);
+                    }
+                });
+
+                btn_updateSuperDiesel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewMyPetrolStation.this, UpdateStationStorage.class);
+                        intent.putExtra("itemId", superDieselItemId);
+                        intent.putExtra("itemType","superdiesel");
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
+                        startActivity(intent);
+                    }
+                });
+
+                btn_arrival95.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewMyPetrolStation.this, Update_Next_Arrival_Stock.class);
+                        intent.putExtra("itemId", petrol95ItemId);
+                        intent.putExtra("itemType","petrol95");
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
+                        startActivity(intent);
+                    }
+                });
+
+                btn_arrivalDiesel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewMyPetrolStation.this, Update_Next_Arrival_Stock.class);
+                        intent.putExtra("itemId", dieselItemId);
+                        intent.putExtra("itemType","diesel");
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
+                        startActivity(intent);
+                    }
+                });
 
 
-
+                btn_arrival_super_diesel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewMyPetrolStation.this, Update_Next_Arrival_Stock.class);
+                        intent.putExtra("itemId", superDieselItemId);
+                        intent.putExtra("itemType","superdiesel");
+                        intent.putExtra("name",stationName);
+                        intent.putExtra("ID",stationId);
+                        intent.putExtra("status",stationStatus);
+                        intent.putExtra("location",stationLocation);
+                        startActivity(intent);
+                    }
+                });
             }
+
+
+
+
 
             @Override
             public void onError(String message) {
                 Toast.makeText(ViewMyPetrolStation.this,message , Toast.LENGTH_LONG).show();
             }
-        });
+        },stationId);
+
 
     }
 

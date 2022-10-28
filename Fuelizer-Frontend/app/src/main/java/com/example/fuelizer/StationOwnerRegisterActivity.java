@@ -77,7 +77,8 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
 
                         if(insertSuccess == true){
                             Toast.makeText(StationOwnerRegisterActivity.this, "User Register Successfully !", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(StationOwnerRegisterActivity.this, PetrolStationRegistration.class);
+                            Intent intent = new Intent(StationOwnerRegisterActivity.this, LoginActivity.class);
+                            intent.putExtra("userType", "stationOwner");
                             startActivity(intent);
                         }else {
                             Toast.makeText(StationOwnerRegisterActivity.this, "Something went wrong !", Toast.LENGTH_SHORT).show();
@@ -107,7 +108,7 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
 
         try {
             // url to post the user data
-            String url = "http://192.168.1.11:8081/api/Supplier";
+            String url = "http://192.168.1.15:8081/api/Supplier";
 
             HashMap<String, String> params = new HashMap<String, String>();
 

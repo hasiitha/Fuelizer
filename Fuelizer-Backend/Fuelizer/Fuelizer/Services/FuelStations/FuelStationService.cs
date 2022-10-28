@@ -45,5 +45,6 @@ namespace Fuelizer.Services.Suppliers
         {
             _fuelStation.ReplaceOne(sup => sup.Id == id, fuelStation);
         }
+
     }
 }
