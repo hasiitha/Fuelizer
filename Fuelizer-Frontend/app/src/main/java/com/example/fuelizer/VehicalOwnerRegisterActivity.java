@@ -171,7 +171,7 @@ public class VehicalOwnerRegisterActivity extends AppCompatActivity {
 
         try {
             // url to post the user data
-            String url = "http://192.168.1.11:8081/api/Customer";
+            String url = "http://192.168.1.5:8081/api/Customer";
 
             HashMap<String, String> params = new HashMap<String, String>();
 

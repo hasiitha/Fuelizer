@@ -8,4 +8,9 @@ public class GlobalVariables {
     public static String userFuelType;
     public static String userVehicle;
     public static String selectedStation;
+    public static int iNoCars;
+    public static int iNoVans;
+    public static int iNoBikes;
+    public static int iNoTuks;
+    public static int iNoLorries;
 }

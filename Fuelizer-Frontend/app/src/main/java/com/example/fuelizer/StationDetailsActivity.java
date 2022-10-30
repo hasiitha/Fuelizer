@@ -29,12 +29,14 @@ public class StationDetailsActivity extends AppCompatActivity {
     private Button btnArrived,btnDeparted;
     String name,id;
     TextView stationName,p92rem,p92full,p95rem,p95full,s92rem,s95full,s95rem,s92full;
-    TextView noCar,noVan,noBike,noTrishaw,noLorry,arrivalTime;
+    TextView noCar,noVan,noBike,noTrishaw,noLorry,arrivalTime,approxTimeText;
     TableRow petrolNormal_row,petrolSuper_row,diselNormal_row,diselSuper_row;
     String typeID,stationID,fuelType,remainder,capacity,noCars,noVans,noBikes,noTuks,noLorries,aTime;
     boolean fnish;
     int updateNo = 0;
     double updatedRemainder =0;
+    int approxTimetoOneVehicle = 4;
+    int approxTime = 0;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -63,6 +65,7 @@ public class StationDetailsActivity extends AppCompatActivity {
         noTrishaw = findViewById(R.id.triShawCount_txt);
         noLorry = findViewById(R.id.lorryCount_txt);
         arrivalTime = findViewById(R.id.pArriveDate_txt);
+        approxTimeText = findViewById(R.id.turn_txt);
 
 
         Intent intent = this.getIntent();
@@ -82,6 +85,7 @@ public class StationDetailsActivity extends AppCompatActivity {
             petrolNormal_row.setVisibility(View.GONE);
         }
 
+        System.out.println("User NAME: "+GlobalVariables.userName);
 
         //calling station data service class to get fuel station details
         StationDataService dataService = new StationDataService(StationDetailsActivity.this);
@@ -119,6 +123,8 @@ public class StationDetailsActivity extends AppCompatActivity {
                 fnish = stationModel.isFinish();
 
 
+
+
             }
 
             @Override
@@ -126,6 +132,40 @@ public class StationDetailsActivity extends AppCompatActivity {
                 Toast.makeText(StationDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
+
+        //calling next turn time calculator
+//        String time = timeCalculator();
+//        approxTimeText.setText(time+" minutes");
+        String vehicleType = GlobalVariables.userVehicle;
+//        Checking user vehicle type and adding to existing queue
+        System.out.println(vehicleType);
+        switch (vehicleType){
+
+            case "Car":
+                approxTime = GlobalVariables.iNoCars * approxTimetoOneVehicle;
+                System.out.println("Approx Car:"+ approxTime);
+                break;
+            case "Van":
+                approxTime = GlobalVariables.iNoVans * approxTimetoOneVehicle;
+                System.out.println("Approx Van:"+ approxTime);
+                break;
+            case "Motorcycle":
+                approxTime = GlobalVariables.iNoBikes * approxTimetoOneVehicle;
+                System.out.println("Approx Bike:"+ approxTime);
+                break;
+            case "Trishaw":
+                approxTime = GlobalVariables.iNoTuks * approxTimetoOneVehicle;
+                System.out.println("Approx Tri:"+ approxTime);
+                break;
+            case "Lorry":
+                approxTime = GlobalVariables.iNoLorries * approxTimetoOneVehicle;
+                System.out.println("Approx Lorry:"+ approxTime);
+                break;
+        }
+        String time = Integer.toString(approxTime)+" minutes";
+        System.out.println("Time:"+ time);
+
+        approxTimeText.setText(time);
 
         //popup part
         btnDeparted.setOnClickListener(new View.OnClickListener() {
@@ -218,26 +258,41 @@ public class StationDetailsActivity extends AppCompatActivity {
                     case "Car":
                         updateNo = Integer.parseInt(noCars);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoCars != 0) {
+                            GlobalVariables.iNoCars = GlobalVariables.iNoCars - 1;
+                        }
                         noCars = Integer.toString(updateNo);
                         break;
                     case "Van":
                         updateNo = Integer.parseInt(noVans);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoVans != 0) {
+                            GlobalVariables.iNoVans = GlobalVariables.iNoVans - 1;
+                        }
                         noVans = Integer.toString(updateNo);
                         break;
                     case "Motorcycle":
                         updateNo = Integer.parseInt(noBikes);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoBikes != 0) {
+                            GlobalVariables.iNoBikes = GlobalVariables.iNoBikes - 1;
+                        }
                         noBikes = Integer.toString(updateNo);
                         break;
                     case "Trishaw":
                         updateNo = Integer.parseInt(noTuks);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoTuks != 0) {
+                            GlobalVariables.iNoTuks = GlobalVariables.iNoTuks - 1;
+                        }
                         noTuks = Integer.toString(updateNo);
                         break;
                     case "Lorry":
                         updateNo = Integer.parseInt(noLorries);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoLorries != 0) {
+                            GlobalVariables.iNoLorries = GlobalVariables.iNoLorries - 1;
+                        }
                         noLorries = Integer.toString(updateNo);
                         break;
                 }
@@ -272,26 +327,40 @@ public class StationDetailsActivity extends AppCompatActivity {
                     case "Car":
                         updateNo = Integer.parseInt(noCars);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoCars != 0){
+                            GlobalVariables.iNoCars = GlobalVariables.iNoCars - 1;
+                        }
                         noCars = Integer.toString(updateNo);
                         break;
                     case "Van":
                         updateNo = Integer.parseInt(noVans);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoVans != 0){
+                        GlobalVariables.iNoVans = GlobalVariables.iNoVans - 1;}
                         noVans = Integer.toString(updateNo);
                         break;
                     case "Motorcycle":
                         updateNo = Integer.parseInt(noBikes);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoBikes != 0) {
+                            GlobalVariables.iNoBikes = GlobalVariables.iNoBikes - 1;
+                        }
                         noBikes = Integer.toString(updateNo);
                         break;
                     case "Trishaw":
                         updateNo = Integer.parseInt(noTuks);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoTuks != 0){
+                        GlobalVariables.iNoTuks = GlobalVariables.iNoTuks - 1;
+                        }
                         noTuks = Integer.toString(updateNo);
                         break;
                     case "Lorry":
                         updateNo = Integer.parseInt(noLorries);
                         updateNo = updateNo - 1;
+                        if(GlobalVariables.iNoLorries != 0) {
+                            GlobalVariables.iNoLorries = GlobalVariables.iNoLorries - 1;
+                        }
                         noLorries = Integer.toString(updateNo);
                         break;
                 }
@@ -312,6 +381,35 @@ public class StationDetailsActivity extends AppCompatActivity {
         });
 
     }
+
+//    public String timeCalculator(){
+//        String vehicleType = GlobalVariables.userVehicle;
+//        //Checking user vehicle type and adding to existing queue
+//        switch (vehicleType){
+//            case "Car":
+//                approxTime = Integer.parseInt(noCars) * approxTimetoOneVehicle;
+//                System.out.println("Approx Car:"+ approxTime);
+//                break;
+//            case "Van":
+//                approxTime = Integer.parseInt(noVans) * approxTimetoOneVehicle;
+//                System.out.println("Approx Van:"+ approxTime);
+//                break;
+//            case "Motorcycle":
+//                approxTime = Integer.parseInt(noBikes) * approxTimetoOneVehicle;
+//                System.out.println("Approx Bike:"+ approxTime);
+//                break;
+//            case "Trishaw":
+//                approxTime = Integer.parseInt(noTuks) * approxTimetoOneVehicle;
+//                System.out.println("Approx Tri:"+ approxTime);
+//                break;
+//            case "Lorry":
+//                approxTime = Integer.parseInt(noLorries) * approxTimetoOneVehicle;
+//                System.out.println("Approx Lorry:"+ approxTime);
+//                break;
+//        }
+//        System.out.println("Approx :"+ approxTime);
+//        return Integer.toString(approxTime);
+//    }
 
 
 }
