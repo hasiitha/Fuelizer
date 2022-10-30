@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -27,6 +28,7 @@ public class CustomerListView extends AppCompatActivity {
     SearchView searchView;
     CustomerListAdapter listAdapter;
     private String userName;
+    ImageView lgBTN2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class CustomerListView extends AppCompatActivity {
 
         stationList = (ListView) findViewById(R.id.stationListView);
         searchView = findViewById(R.id.searchbar_input);
+        lgBTN2 = findViewById(R.id.lgOut2);
 
         //creation of station service object
         StationDataService stationDataService = new StationDataService(CustomerListView.this);
@@ -92,6 +95,14 @@ public class CustomerListView extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 listAdapter.getFilter().filter(s);
                 return false;
+            }
+        });
+
+        lgBTN2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CustomerListView.this,MainActivity.class);
+                startActivity(intent);
             }
         });
     }

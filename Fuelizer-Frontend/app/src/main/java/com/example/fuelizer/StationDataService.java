@@ -95,7 +95,7 @@ public class StationDataService {
         RequestQueue queue = Volley.newRequestQueue(context);
         //created an object of customer model to store the response data
         CustomerModel customerModel = new CustomerModel();
-        String url = URI + "Customer/ByName/" + GlobalVariables.userName;
+        String url = URI + "Customer/ByName/"+ GlobalVariables.userName;
         StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -158,7 +158,11 @@ public class StationDataService {
                     fuelStationDetailsModel.setArrivalTime(first_data.getString("arrivalTime"));
                     fuelStationDetailsModel.setFinish(first_data.getBoolean("finish"));
 
-
+                    GlobalVariables.iNoCars = Integer.parseInt(first_data.getString("noOfCars"));
+                    GlobalVariables.iNoVans = Integer.parseInt(first_data.getString("noOfVans"));
+                    GlobalVariables.iNoBikes = Integer.parseInt(first_data.getString("noOfTrishaw"));
+                    GlobalVariables.iNoTuks = Integer.parseInt(first_data.getString("noOfCars"));
+                    GlobalVariables.iNoLorries = Integer.parseInt(first_data.getString("noOfLorries"));
                     fuelDataResponseListener.onResponse(fuelStationDetailsModel);
 
                 } catch (JSONException e) {

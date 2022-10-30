@@ -2,10 +2,13 @@ package com.example.fuelizer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ public class ViewMyPetrolStation extends AppCompatActivity {
     String stationStatus;
     String stationLocation;
     String statusO;
+    ImageView lgBTN1;
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,7 @@ public class ViewMyPetrolStation extends AppCompatActivity {
 
         TextView textViewToChange = (TextView) findViewById(R.id.st_name);
         textViewToChange.setText(stationName);
+        lgBTN1 = findViewById(R.id.lgout1);
 
 
 
@@ -333,6 +339,13 @@ public class ViewMyPetrolStation extends AppCompatActivity {
             }
         },stationId);
 
+        lgBTN1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewMyPetrolStation.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

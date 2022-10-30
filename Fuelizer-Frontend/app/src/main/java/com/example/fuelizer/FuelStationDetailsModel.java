@@ -131,4 +131,5 @@ public class FuelStationDetailsModel {
     public void setFinish(boolean finish) {
         this.finish = finish;
     }
+
 }

@@ -28,7 +28,7 @@ public class MyPetrolStationDataService {
     public MyPetrolStationDataService(Context context) {
         this.context = context;
     }
-
+    final String URI = "http://192.168.1.5:8081/api/";
 
 
     //Interface and method for GetAllStations for a specific user
@@ -40,7 +40,7 @@ public class MyPetrolStationDataService {
         System.out.println(ownerId+"Owneridesa");
         ArrayList<StationModel> stationModelList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://192.168.1.10:8081/api/FuelStation/getmyfuelstations/"+ownerId;
+        String url = URI+"FuelStation/getmyfuelstations/"+ownerId;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -87,7 +87,7 @@ public class MyPetrolStationDataService {
         HashMap<String,FuelTypesData> fueltypesmap = new HashMap<>();
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://192.168.1.10:8081/api/FuelType/getFuelTypesofStation/"+StationId;
+        String url = URI+"FuelType/getFuelTypesofStation/"+StationId;
         //http://192.168.1.15:8081/api/FuelStation
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
             @Override
@@ -153,7 +153,7 @@ public class MyPetrolStationDataService {
 
      RequestQueue queue = Volley.newRequestQueue(context);
 
-        String url = "http://192.168.1.10:8081/api/FuelType/toUpdateArrivals/"+typeID+"?arrivaltime="+date;
+        String url = URI+"FuelType/toUpdateArrivals/"+typeID+"?arrivaltime="+date;
 
 
        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
@@ -198,7 +198,7 @@ public class MyPetrolStationDataService {
         RequestQueue queue = Volley.newRequestQueue(context);
 
         //String url = URI+"FuelType/toUpdateQueue/"+typeID+"?carCount="+noCars+"&vanCount="+noVans+"&bikeCount="+noBikes+"&tukCount="+noTuks+"&lorryCount="+noLorries;
-        String url = "http://192.168.1.10:8081/api/FuelType/toaddamount/"+typeID+"?amount="+amount;
+        String url = URI+"FuelType/toaddamount/"+typeID+"?amount="+amount;
 
 
         StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
@@ -242,7 +242,7 @@ public class MyPetrolStationDataService {
         RequestQueue queue = Volley.newRequestQueue(context);
 
 
-        String url = "http://192.168.1.10:8081/api/FuelType/toChangeCapacity/"+typeID+"?newCapacity="+newCapacity;
+        String url = URI+"FuelType/toChangeCapacity/"+typeID+"?newCapacity="+newCapacity;
 
 
         StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
@@ -287,7 +287,7 @@ public class MyPetrolStationDataService {
         RequestQueue queue = Volley.newRequestQueue(context);
 
 
-        String url = "http://192.168.1.10:8081/api/FuelType/finishFuel/"+typeID;
+        String url = URI+"FuelType/finishFuel/"+typeID;
 
 
         StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
@@ -324,7 +324,7 @@ public class MyPetrolStationDataService {
         RequestQueue queue = Volley.newRequestQueue(context);
 
 
-        String url = "http://192.168.1.10:8081/api/FuelStation/changeStatus/"+stationId;
+        String url = URI+"FuelStation/changeStatus/"+stationId;
 
 
         StringRequest putRequest = new StringRequest(Request.Method.PUT, url,

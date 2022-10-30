@@ -108,7 +108,7 @@ public class StationOwnerRegisterActivity extends AppCompatActivity {
 
         try {
             // url to post the user data
-            String url = "http://192.168.1.15:8081/api/Supplier";
+            String url = "http://192.168.1.5:8081/api/Supplier";
 
             HashMap<String, String> params = new HashMap<String, String>();
 
