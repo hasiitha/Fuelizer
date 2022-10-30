@@ -56,7 +56,7 @@ public class MypetrolstationlistviewActivity extends AppCompatActivity {
                         intent.putExtra("name", stationModel.get(i).getStation_name());
                         intent.putExtra("ID",stationModel.get(i).getId());
                         intent.putExtra("location",stationModel.get(i).getLocation());
-                        intent.putExtra("status",stationModel.get(i).isStatus());
+                        intent.putExtra("status",status);
                         startActivity(intent);
                     }
                 });

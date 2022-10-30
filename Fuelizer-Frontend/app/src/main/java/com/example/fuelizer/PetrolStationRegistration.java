@@ -68,7 +68,7 @@ public class PetrolStationRegistration extends AppCompatActivity {
     // url to post the Petrol Station data to DB
     private void postDataToDB(String stationName, String location,String status,String userId){
 
-        String url = "http://192.168.1.15:8081/api/FuelStation";
+        String url = "http://192.168.1.10:8081/api/FuelStation";
 
 
         HashMap<String, String> params = new HashMap<String, String>();

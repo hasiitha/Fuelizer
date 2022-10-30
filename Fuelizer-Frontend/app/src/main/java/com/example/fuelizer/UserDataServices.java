@@ -34,7 +34,7 @@ public class UserDataServices {
         RequestQueue queue = Volley.newRequestQueue(context);
 
         System.out.println(userName+"usernamehsa");
-        String url = "http://192.168.1.15:8081/api/Supplier/getUserIdByUserName/"+"?username="+userName;;
+        String url = "http://192.168.1.10:8081/api/Supplier/getUserIdByUserName/"+"?username="+userName;;
 
 
         StringRequest getRequest = new StringRequest(Request.Method.GET, url,

@@ -52,7 +52,7 @@ namespace Fuelizer.Controllers
 
             FuelType petrol = new FuelType();
             petrol.StationId = fuelStation.Id;
-            petrol.Type = "petrol";
+            petrol.Type = "Petrol92";
             petrol.Capacity = "0";
             petrol.Remainder = "0";
             petrol.ArrivalTime = "Not Added";
@@ -66,7 +66,7 @@ namespace Fuelizer.Controllers
 
             FuelType petrol95 = new FuelType();
             petrol95.StationId = fuelStation.Id;
-            petrol95.Type = "petrol95";
+            petrol95.Type = "Petrol95";
             petrol95.Capacity = "0";
             petrol95.Remainder = "0";
             petrol95.ArrivalTime = "Not Added";
@@ -80,7 +80,7 @@ namespace Fuelizer.Controllers
 
             FuelType diesel = new FuelType();
             diesel.StationId = fuelStation.Id;
-            diesel.Type = "diesel";
+            diesel.Type = "Diesel";
             diesel.Capacity = "0";
             diesel.Remainder = "0";
             diesel.ArrivalTime = "Not Added";
@@ -96,7 +96,7 @@ namespace Fuelizer.Controllers
 
             FuelType superdiesel = new FuelType();
             superdiesel.StationId = fuelStation.Id;
-            superdiesel.Type = "superdiesel";
+            superdiesel.Type = "SuperDiesel";
             superdiesel.Capacity = "0";
             superdiesel.Remainder = "0";
             superdiesel.ArrivalTime = "Not Added";
