@@ -352,13 +352,13 @@
         app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.462" />
+        app:layout_constraintVertical_bias="0.164" />
 
     <TextView
         android:id="@+id/h_statusView"
         android:layout_width="203dp"
         android:layout_height="54dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginEnd="28dp"
         android:fontFamily="sans-serif-black"
         android:text="OPEN"
         android:textAlignment="center"
@@ -366,6 +366,18 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/h_updateStatus"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.18" />
+
+    <ImageView
+        android:id="@+id/lgout1"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="65dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/h_statusView"
+        app:srcCompat="@android:drawable/ic_lock_power_off" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

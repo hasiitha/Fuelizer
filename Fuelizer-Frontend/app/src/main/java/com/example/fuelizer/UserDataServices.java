@@ -13,7 +13,7 @@ import com.android.volley.toolbox.Volley;
 public class UserDataServices {
 
     Context context;
-    String userName ="63565a4d34628adcf7ce4daf";
+    final String URI = "http://192.168.1.5:8081/api/";
 
 
     public UserDataServices(Context context) {
@@ -34,7 +34,7 @@ public class UserDataServices {
         RequestQueue queue = Volley.newRequestQueue(context);
 
         System.out.println(userName+"usernamehsa");
-        String url = "http://192.168.1.10:8081/api/Supplier/getUserIdByUserName/"+"?username="+userName;;
+        String url = URI+"Supplier/getUserIdByUserName/"+"?username="+userName;;
 
 
         StringRequest getRequest = new StringRequest(Request.Method.GET, url,
