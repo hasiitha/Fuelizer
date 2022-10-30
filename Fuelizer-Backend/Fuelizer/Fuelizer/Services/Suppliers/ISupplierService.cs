@@ -14,5 +14,8 @@ namespace Fuelizer.Services.Suppliers
         void Update(string id, Supplier supplier);
 
         void Remove(string id);
+
+
+        Supplier GetIdByUserName(string userName);
     }
 }

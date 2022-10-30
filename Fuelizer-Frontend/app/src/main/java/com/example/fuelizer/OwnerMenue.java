@@ -9,7 +9,6 @@ import android.widget.Button;
 /*Dashboard for the station owner*/
 public class OwnerMenue extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,24 +17,55 @@ public class OwnerMenue extends AppCompatActivity {
         Button regbtn = findViewById(R.id.h_btn_regstation);
         Button viewbtn = findViewById(R.id.h_btn_viewstation);
 
-      //String   stationId = getIntent().getStringExtra("userId");
-        String   stationId="";
-        regbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OwnerMenue.this, PetrolStationRegistration.class);
+      String   userName = getIntent().getStringExtra("username");
 
-                startActivity(intent);
-            }
-        });
 
-        viewbtn.setOnClickListener(new View.OnClickListener() {
+        UserDataServices dataService = new UserDataServices(OwnerMenue.this);
+        dataService.GetUserByID(new UserDataServices.VolleyResponseListnergetOwnerByUserId() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OwnerMenue.this, MypetrolstationlistviewActivity.class);
-                intent.putExtra("userId", "stationId");
-                startActivity(intent);
+            public void onResponse(String userId) {
+
+
+                regbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+
+                    public void onClick(View v) {
+                    if(userId != null){
+                        Intent intent = new Intent(OwnerMenue.this, PetrolStationRegistration.class);
+                        intent.putExtra("userId", userId);
+                        intent.putExtra("username", userName);
+                        startActivity(intent);
+                    }
+
+                    }
+                });
+
+                viewbtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(userId != null){
+                        Intent intent = new Intent(OwnerMenue.this, MypetrolstationlistviewActivity.class);
+                            intent.putExtra("userId", userId);
+                            intent.putExtra("userName", userName);
+                        startActivity(intent);
+                        }
+                    }
+                });
             }
-        });
+
+            //
+            @Override
+            public void onError(String message) {
+
+            }
+        },userName);
+
+
+        //
+
+
+
+
+
     }
 }

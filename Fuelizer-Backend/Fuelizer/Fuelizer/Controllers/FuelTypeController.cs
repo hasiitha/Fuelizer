@@ -180,7 +180,28 @@ namespace Fuelizer.Controllers
             return NoContent();
 
         }
-        
+
+
+
+        // PUT api/<FuelTypeController>/5
+        [HttpPut("toChangeCapacity/{id}")]
+        public ActionResult AddCapacity(string id, string newCapacity)
+        {
+            var existingfueltype = fueltypesservice.Get(id);
+            if (existingfueltype == null)
+            {
+                return NotFound($"fueltype with id = {id} not found");
+            }
+            existingfueltype.Capacity = newCapacity;
+            var toUpdate = existingfueltype;
+            fueltypesservice.Update(id, toUpdate);
+            return NoContent();
+
+        }
+
+
+
+
 
     }
 }

@@ -23,8 +23,9 @@ import java.util.HashMap;
 
 /*Register petrol stations don here*/
 public class PetrolStationRegistration extends AppCompatActivity {
+
     private RequestQueue requestQueue; EditText station,locationN;
-    Button btn_AddStation;
+    Button btn_AddStation;  String   userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +36,8 @@ public class PetrolStationRegistration extends AppCompatActivity {
         locationN = findViewById(R.id.txtE_location);
 
 
-
-
+      userName = getIntent().getStringExtra("username");
+        String   userId = getIntent().getStringExtra("userId");
 
         btn_AddStation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,47 +47,47 @@ public class PetrolStationRegistration extends AppCompatActivity {
                 String status;
                 stationName = station.getText().toString();
                 location =  locationN.getText().toString();
-                status = "true";
+
+                status = "false";
 
                 if(location.equals("") || stationName.equals("")){
 
                     Toast.makeText(PetrolStationRegistration.this, "Enter all the fields !", Toast.LENGTH_SHORT).show();
                 }else {
 
+                    postDataToDB(stationName,location,status,userId);
 
-//                        postDataToDB(stationName,location,status);
-//                    Toast.makeText(PetrolStationRegistration.this, "Station  Registered Successfully !", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(PetrolStationRegistration.this, MypetrolstationlistviewActivity.class);
-                intent.putExtra("stationId", "id");
-                startActivity(intent);
 
                 }
 
-                //nav
-//
             }
         });
     }
 
 
-    //db
-    private void postDataToDB(String stationName, String location,String status){
-        // url to post the user data
-        String url = "http://192.168.1.15:8081/api/FuelStation";
-//        vehicleOwnerPB.setVisibility(View.VISIBLE);
+    // url to post the Petrol Station data to DB
+    private void postDataToDB(String stationName, String location,String status,String userId){
+
+        String url = "http://192.168.1.10:8081/api/FuelStation";
+
 
         HashMap<String, String> params = new HashMap<String, String>();
 
         params.put("stationName", stationName);
         params.put("location", location);
         params.put("status", status);
+        params.put("ownerId", userId);
         JsonObjectRequest req = new JsonObjectRequest(url, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             VolleyLog.v("Response:%n %s", response.toString(4));
+                            Toast.makeText(PetrolStationRegistration.this, "Petrol Station Added to Database !", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(PetrolStationRegistration.this, OwnerMenue.class);
+                            intent.putExtra("username",userName);
 
+                            startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

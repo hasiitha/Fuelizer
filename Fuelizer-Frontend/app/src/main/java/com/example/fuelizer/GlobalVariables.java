@@ -10,6 +10,8 @@ public class GlobalVariables {
     public static String selectedStation;
     public static int iNoCars;
     public static int iNoVans;
+    public static  String userId;
+    public static  String stationStatus;
     public static int iNoBikes;
     public static int iNoTuks;
     public static int iNoLorries;

@@ -43,7 +43,10 @@ namespace Fuelizer.Services.Suppliers
 
         void IFuelStationService.Update(string id, FuelStation fuelStation)
         {
-            _fuelStation.ReplaceOne(sup => sup.Id == id, fuelStation);
+            Console.WriteLine(fuelStation.StationName);
+            _fuelStation.ReplaceOne(fuel => fuel.Id == id, fuelStation);
+            
         }
+
     }
 }

@@ -41,9 +41,11 @@ public class PetrolStationAdapter extends ArrayAdapter<StationModel> {
         if(model.isStatus() == true){
             status.setText("OPEN");
             status.setTextColor(Color.parseColor("#33cc5a"));
+            GlobalVariables.stationStatus ="OPEN";
         }else {
             status.setText("CLOSED");
             status.setTextColor(Color.parseColor("#800811"));
+            GlobalVariables.stationStatus ="CLOSE";
         }
         return convertView;
 //        return super.getView(position, convertView, parent);

@@ -82,6 +82,22 @@ namespace Fuelizer.Controllers
             return Ok($"supplier with id = {id} deleted");
         }
 
-    
-}
+
+        // GET api/<SupplierController>/5
+        [HttpGet("getUserIdByUserName")]
+        public ActionResult<String> GetIdByUserName(string username)
+        {
+
+
+            var supplier = supplierservice.GetIdByUserName(username);
+            if (supplier == null)
+            {
+                return NotFound($"supplier with userName = {username} not found");
+            }
+            return supplier.Id;
+        }
+
+
+
+    }
 }

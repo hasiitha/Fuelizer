@@ -44,5 +44,10 @@ namespace Fuelizer.Services.Suppliers
             _supplier.ReplaceOne(sup => sup.Id == id, supplier);
 
         }
+
+        Supplier ISupplierService.GetIdByUserName(string userName)
+        {
+            return _supplier.Find(supplier => supplier.UserName == userName).FirstOrDefault();
+        }
     }
 }

@@ -21,5 +21,7 @@ namespace Fuelizer.Services.FuelTypes
 
         void UpdateFuelType(string id, FuelType fuelType);
 
+        void addFuelTypes(FuelType fuelType);
+
     }
 }

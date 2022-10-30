@@ -56,5 +56,10 @@ namespace Fuelizer.Services.FuelTypes
         {
             _fueltype.ReplaceOne(sup => sup.Id == id, fuelType);
         }
+
+        void IFuelTypesService.addFuelTypes(FuelType fuelType)
+        {
+            _fueltype.InsertOne(fuelType);
+        }
     }
 }

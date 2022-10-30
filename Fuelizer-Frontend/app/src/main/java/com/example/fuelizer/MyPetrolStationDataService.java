@@ -20,35 +20,32 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-/*A class to do the http request using volley for fuel stations*/
+/*A class to do the http request using volley for fuel stations related rest functionalities*/
+//Reference: https://www.youtube.com/watch?v=xPi-z3nOcn8&t=6488s&ab_channel=freeCodeCamp.org
 public class MyPetrolStationDataService {
-
-    //Reference: https://www.youtube.com/watch?v=xPi-z3nOcn8&t=6488s&ab_channel=freeCodeCamp.org
     Context context;
-    String ownerId ="63565a4d34628adcf7ce4daf";
-    String StationId = "634e6b9a2d6a9c529c1064a4";
-
+    String ownerId ;
     public MyPetrolStationDataService(Context context) {
         this.context = context;
     }
 
 
 
+    //Interface and method for GetAllStations for a specific user
     public interface VolleyResponseListener{
         void onResponse(ArrayList<StationModel> stationModel);
         void onError(String message);
     }
-//gett all request
-    public void getAllStations(MyPetrolStationDataService.VolleyResponseListener volleyResponseListener){
+    public void getAllStations(MyPetrolStationDataService.VolleyResponseListener volleyResponseListener,String ownerId){
+        System.out.println(ownerId+"Owneridesa");
         ArrayList<StationModel> stationModelList = new ArrayList<>();
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://192.168.1.15:8081/api/FuelStation/getmyfuelstations/"+ownerId;
-        //http://192.168.1.15:8081/api/FuelStation
+        String url = "http://192.168.1.10:8081/api/FuelStation/getmyfuelstations/"+ownerId;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 try {
-                    System.out.println("Hi: "+response);
+
                     for (int i = 0; i < response.length(); i++) {
                         StationModel stationModel = new StationModel();
                         JSONObject first_data = (JSONObject) response.get(i);
@@ -79,18 +76,18 @@ public class MyPetrolStationDataService {
     }
 
 
-    //getting petrolstationdetails
+    //Interface and method for get Details of a specific Fuel Station
     public interface VolleyResponseListenerDet{
         void onResponse(HashMap<String,FuelTypesData> fuelType);
         void onError(String message);
     }
 
-    public void getstationFuelTypes(MyPetrolStationDataService.VolleyResponseListenerDet volleyResponseListener){
+    public void getstationFuelTypes(MyPetrolStationDataService.VolleyResponseListenerDet volleyResponseListener,String StationId){
         ArrayList<StationModel> stationModelList = new ArrayList<>();
         HashMap<String,FuelTypesData> fueltypesmap = new HashMap<>();
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url = "http://192.168.1.15:8081/api/FuelType/getFuelTypesofStation/"+StationId;
+        String url = "http://192.168.1.10:8081/api/FuelType/getFuelTypesofStation/"+StationId;
         //http://192.168.1.15:8081/api/FuelStation
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,url,null, new Response.Listener<JSONArray>() {
             @Override
@@ -111,20 +108,22 @@ public class MyPetrolStationDataService {
 
 
 
-                        if(fuelType.getType().equalsIgnoreCase("Petrol") ){
+                        if(fuelType.getType().equalsIgnoreCase("Petrol")||fuelType.getType().equalsIgnoreCase("Petrol92") ){
                             System.out.println("Single object type "+fuelType.getType());
                             fueltypesmap.put("petrol",fuelType);
 
-                        }else if(fuelType.getType().equalsIgnoreCase("Petrol95") ){
+                        }else if(fuelType.getType().equalsIgnoreCase("Petrol95") ||(fuelType.getType().equalsIgnoreCase("Petrol95"))){
                             fueltypesmap.put("petrol95",fuelType);
-                        }else if(fuelType.getType().equalsIgnoreCase("Disel")  ){
+                        }else if(fuelType.getType().equalsIgnoreCase("Diesel")  ){
                             fueltypesmap.put("diesel",fuelType);
 
-                        }else if(fuelType.getType().equalsIgnoreCase("SuperDisel")){
+                        }else if(fuelType.getType().equalsIgnoreCase("SuperDiesel")){
                             fueltypesmap.put("superdiesel",fuelType);
                         }
 
                     }
+
+
 
                     volleyResponseListener.onResponse(fueltypesmap);
 
@@ -144,19 +143,17 @@ public class MyPetrolStationDataService {
     }
 
 
+    //Interface and method for update Arriving date and times
     public interface VolleyResponseListenerUpdateArrivalDate{
         void onResponse(String msg);
         void onError(String message);
     }
 
-
-//update fuel types in fuel stations
     public void updateFuelArrivals(VolleyResponseListenerUpdateArrivalDate updateFuelArrivalsResponseListener,String typeID,String date){
 
      RequestQueue queue = Volley.newRequestQueue(context);
 
-     //String url = URI+"FuelType/toUpdateQueue/"+typeID+"?carCount="+noCars+"&vanCount="+noVans+"&bikeCount="+noBikes+"&tukCount="+noTuks+"&lorryCount="+noLorries;
-        String url = "http://192.168.1.15:8081/api/FuelType/toUpdateArrivals/"+typeID+"?arrivaltime="+date;
+        String url = "http://192.168.1.10:8081/api/FuelType/toUpdateArrivals/"+typeID+"?arrivaltime="+date;
 
 
        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
@@ -188,4 +185,175 @@ public class MyPetrolStationDataService {
 
 
 
-}
+//Interface and method for update Stocks
+    public interface VolleyResponseListenerUpdateStocks{
+        void onResponse(String msg);
+        void onError(String message);
+    }
+
+
+    //update fuel capcities
+    public void updateStocks(VolleyResponseListenerUpdateStocks updateFuelArrivalsResponsestocks,String typeID,String amount){
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+        //String url = URI+"FuelType/toUpdateQueue/"+typeID+"?carCount="+noCars+"&vanCount="+noVans+"&bikeCount="+noBikes+"&tukCount="+noTuks+"&lorryCount="+noLorries;
+        String url = "http://192.168.1.10:8081/api/FuelType/toaddamount/"+typeID+"?amount="+amount;
+
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        updateFuelArrivalsResponsestocks.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                        updateFuelArrivalsResponsestocks.onError("Error Updating Queue!!!");
+                    }
+                }
+        );
+
+        queue.add(putRequest);
+
+
+
+
+
+    }
+
+
+//Interface and method for Update capacity
+    public interface VolleyResponseListenerUpdateCapacity{
+        void onResponse(String msg);
+        void onError(String message);
+    }
+
+
+    //update fuel types in fuel stations
+    public void updateCapacity(VolleyResponseListenerUpdateCapacity updateCapacityListener,String typeID,String newCapacity){
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+
+        String url = "http://192.168.1.10:8081/api/FuelType/toChangeCapacity/"+typeID+"?newCapacity="+newCapacity;
+
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        updateCapacityListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                        updateCapacityListener.onError("Error Updating Queue!!!");
+                    }
+                }
+        );
+
+        queue.add(putRequest);
+
+
+
+
+
+    }
+
+
+
+    //Interface and method for Update Finish status
+    public interface VolleyResponseListenerFinishStocks{
+        void onResponse(String msg);
+        void onError(String message);
+    }
+
+
+    //update fuel types in fuel stations
+    public void finishStocks(VolleyResponseListenerFinishStocks finishStocksListener,String typeID){
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+
+        String url = "http://192.168.1.10:8081/api/FuelType/finishFuel/"+typeID;
+
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        finishStocksListener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                        finishStocksListener.onError("Error Updating Queue!!!");
+                    }
+                }
+        );
+
+        queue.add(putRequest);
+        }
+
+
+        //Interface and Method for Update Petrol Station Open Close Status
+    public interface VolleyResponseListenerUpdateStatus{
+        void onResponse(String msg);
+        void onError(String message);
+    }
+
+    public void updateStationStatus(VolleyResponseListenerUpdateStatus updateStationStatusListener,String stationId) {
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+
+
+        String url = "http://192.168.1.10:8081/api/FuelStation/changeStatus/"+stationId;
+
+
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        updateStationStatusListener.onResponse(response);
+                       if(GlobalVariables.stationStatus == "OPEN"){
+                           GlobalVariables.stationStatus = "CLOSE";
+                       } else{
+                           GlobalVariables.stationStatus = "OPEN";
+                       }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", error.getMessage());
+                        updateStationStatusListener.onError("Error Updating Queue!!!");
+                    }
+                }
+        );
+
+        queue.add(putRequest);
+
+    }
+
+
+
+
+    }
